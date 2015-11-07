@@ -106,7 +106,7 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MyMovies.Dal\MyMovies.Dal.csproj">
+    <ProjectReference Include="..\MyMovies.Dal\MyMovies.Dal.csproj">
       <Project>{20f06949-1352-4a58-af7d-7cc8a323eeb1}</Project>
       <Name>MyMovies.Dal</Name>
     </ProjectReference>
