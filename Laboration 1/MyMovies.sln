@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovies", "MyMovies\MyMovies.csproj", "{BA833DA9-9519-4930-BCB4-68C0BD3DCE16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovies.Dal", "..\MyMovies.Dal\MyMovies.Dal.csproj", "{20F06949-1352-4A58-AF7D-7CC8A323EEB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovies.Dal", "MyMovies.Dal\MyMovies.Dal.csproj", "{20F06949-1352-4A58-AF7D-7CC8A323EEB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
