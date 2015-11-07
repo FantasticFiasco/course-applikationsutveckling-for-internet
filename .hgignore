@@ -13,3 +13,7 @@ packages
 *.suo
 *.user
 *.GhostDoc.xml
+
+# LocalDB databases
+*.mdf
+*.ldf

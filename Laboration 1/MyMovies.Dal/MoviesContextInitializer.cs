@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
@@ -74,19 +75,37 @@ namespace MyMovies.Dal
             double rating,
             params string[] actorNames)
         {
-            IEnumerable<Actor> actors = actorNames.Select(actorName =>
-                new Actor
-                {
-                    Name = actorName
-                });
+            List<Actor> actors = actorNames
+                .Select(actorName => CreateActor(context, actorName))
+                .ToList();
 
             context.Movies.Add(new Movie
             {
                 Title = title,
                 Year = year,
                 Rating = rating,
-                Actors = new Collection<Actor>(actors.ToList())
+                Actors = new Collection<Actor>(actors)
             });
+        }
+
+        private static Actor CreateActor(MoviesContext context, string name)
+        {
+            Actor existingActor = context.Actors.FirstOrDefault(actor =>
+                string.Compare(actor.Name, name, StringComparison.OrdinalIgnoreCase) == 0);
+
+            if (existingActor != null)
+                return existingActor;
+
+            existingActor = context.Actors.Local.FirstOrDefault(actor =>
+                string.Compare(actor.Name, name, StringComparison.OrdinalIgnoreCase) == 0);
+
+            if (existingActor != null)
+                return existingActor;
+
+            return new Actor
+            {
+                Name = name
+            };
         }
     }
 }
