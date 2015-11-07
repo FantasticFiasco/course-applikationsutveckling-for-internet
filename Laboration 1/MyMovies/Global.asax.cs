@@ -18,7 +18,7 @@ namespace MyMovies
 
         private static void ConfigureDatabase()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MoviesContext>());
+            Database.SetInitializer(new MoviesContextInitializer());
         }
     }
 }

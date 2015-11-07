@@ -4,7 +4,7 @@ namespace MyMovies.Dal
 {
     public class Movie
     {
-        private Collection<Actor> cast; 
+        private Collection<Actor> actors; 
 
         public int Id { get; set; }
 
@@ -14,10 +14,10 @@ namespace MyMovies.Dal
 
         public double Rating { get; set; }
 
-        public virtual Collection<Actor> Cast
+        public virtual Collection<Actor> Actors
         {
-            get { return cast ?? (cast = new Collection<Actor>()); }
-            set { cast = value; }
+            get { return actors ?? (actors = new Collection<Actor>()); }
+            set { actors = value; }
         }
     }
 }
