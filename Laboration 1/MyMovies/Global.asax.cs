@@ -1,6 +1,8 @@
-﻿using System.Web;
+﻿using System.Data.Entity;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MyMovies.Dal;
 
 namespace MyMovies
 {
@@ -10,6 +12,13 @@ namespace MyMovies
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            ConfigureDatabase();
+        }
+
+        private static void ConfigureDatabase()
+        {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MoviesContext>());
         }
     }
 }
