@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using MyMovies.Dal;
+using MyMovies.ViewModels;
 
 namespace MyMovies.Controllers
 {
@@ -9,13 +10,14 @@ namespace MyMovies.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            using (MoviesContext context = new MoviesContext())
+            using (var context = new MoviesContext())
             {
-                var x = context.Movies.ToArray();
-                var y = context.Actors.ToArray();
-            }
+                MovieTitle[] movieTitles = context.Movies
+                    .Select(movie => new MovieTitle { Title = movie.Title, Rating = movie.Rating })
+                    .ToArray();
 
-            return View();
+                return View(movieTitles);
+            }
         }
     }
 }

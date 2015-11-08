@@ -1,5 +1,23 @@
-﻿@{
+﻿@using MyMovies.ViewModels
+@model IEnumerable<MovieTitle>
+
+
+@{
     ViewBag.Title = "Movies";
 }
 
 <h2>Movies</h2>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Rating</th>
+    </tr>
+    @foreach (MovieTitle movieTitle in Model)
+    {
+        <tr>
+            <td>@movieTitle.Title</td>
+            <td>@movieTitle.Rating</td>
+        </tr>
+    }
+</table>
