@@ -1,7 +1,9 @@
 ﻿namespace MyMovies.ViewModels
 {
-    public class MovieTitle
+    public class MovieTitleViewModel
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public double Rating { get; set; }

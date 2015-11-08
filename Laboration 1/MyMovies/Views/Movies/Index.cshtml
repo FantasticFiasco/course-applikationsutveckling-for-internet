@@ -1,5 +1,5 @@
 ﻿@using MyMovies.ViewModels
-@model IEnumerable<MovieTitle>
+@model IEnumerable<MovieTitleViewModel>
 
 
 @{
@@ -13,10 +13,10 @@
         <th>Title</th>
         <th>Rating</th>
     </tr>
-    @foreach (MovieTitle movieTitle in Model)
+    @foreach (MovieTitleViewModel movieTitle in Model)
     {
         <tr>
-            <td>@movieTitle.Title</td>
+            <td>@Html.ActionLink(@movieTitle.Title, "Details", new { id = @movieTitle.Id})</td>
             <td>@movieTitle.Rating</td>
         </tr>
     }
