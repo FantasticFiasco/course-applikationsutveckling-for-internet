@@ -5,9 +5,9 @@ namespace MyMovies.Dal
 {
     public class MoviesContext : DbContext
     {
-        public virtual DbSet<Movie> Movies { get; set; }
+        public virtual IDbSet<Movie> Movies { get; set; }
 
-        public virtual DbSet<Actor> Actors { get; set; }
+        public virtual IDbSet<Actor> Actors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

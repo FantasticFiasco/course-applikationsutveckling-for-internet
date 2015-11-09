@@ -1,5 +1,5 @@
-﻿@using MyMovies.ViewModels
-@model MovieViewModel
+﻿@using MyMovies.Dal
+@model Movie
 
 @{
     ViewBag.Title = @Model.Title;
@@ -7,6 +7,9 @@
 
 <h2>@Model.Title</h2>
 
-<p>Rating: @Model.Rating</p>
-<p>Year: @Model.Year</p>
-<p>Cast: @Model.Cast</p>
+<ul>
+    <li>@Html.DisplayNameFor(movie => movie.Rating): @Model.Rating</li>
+    <li>@Html.DisplayNameFor(movie => movie.Year): @Model.Year</li>
+    <li>@Html.DisplayNameFor(movie => movie.Actors): @Model.Actors</li>
+</ul>
+

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyMovies.Dal
 {
@@ -10,8 +11,10 @@ namespace MyMovies.Dal
 
         public string Title { get; set; }
 
+        [Range(1900, 2020)]
         public int Year { get; set; }
 
+        [Range(0, 10)]
         public double Rating { get; set; }
 
         public virtual Collection<Actor> Actors

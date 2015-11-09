@@ -1,6 +1,5 @@
-﻿@using MyMovies.ViewModels
-@model IEnumerable<MovieTitleViewModel>
-
+﻿@using MyMovies.Dal
+@model IEnumerable<Movie>
 
 @{
     ViewBag.Title = "Movies";
@@ -8,16 +7,24 @@
 
 <h2>Movies</h2>
 
-<table>
+<p>@Html.ActionLink("Create New", "Create")</p>
+
+<table class="table">
     <tr>
-        <th>Title</th>
-        <th>Rating</th>
+        <th>@Html.DisplayNameFor(movieTitle => movieTitle.Title)</th>
+        <th>@Html.DisplayNameFor(movieTitle => movieTitle.Rating)</th>
+        <th />
     </tr>
-    @foreach (MovieTitleViewModel movieTitle in Model)
-    {
-        <tr>
-            <td>@Html.ActionLink(@movieTitle.Title, "Details", new { id = @movieTitle.Id})</td>
-            <td>@movieTitle.Rating</td>
-        </tr>
-    }
+@foreach (Movie movie in Model)
+{
+    <tr>
+        <td>@movie.Title</td>
+        <td>@movie.Rating</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = movie.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = movie.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = movie.Id })
+        </td>
+    </tr>
+}
 </table>
