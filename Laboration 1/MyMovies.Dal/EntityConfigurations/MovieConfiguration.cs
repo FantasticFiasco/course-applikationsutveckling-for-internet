@@ -6,9 +6,6 @@ namespace MyMovies.Dal.EntityConfigurations
     {
         public MovieConfiguration()
         {
-            Property(movie => movie.Title)
-                .IsRequired();
-
             HasMany(movie => movie.Actors)
                 .WithMany(actor => actor.Movies);
         }

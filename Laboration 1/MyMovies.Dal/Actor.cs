@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyMovies.Dal
 {
@@ -8,6 +9,7 @@ namespace MyMovies.Dal
 
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public virtual Collection<Movie> Movies

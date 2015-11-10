@@ -6,11 +6,7 @@ namespace MyMovies.Dal.EntityConfigurations
     {
         public ActorConfiguration()
         {
-            Property(actor => actor.Name)
-                .IsRequired();
-
-            HasMany(actor => actor.Movies)
-                .WithMany(movie => movie.Actors);
+            HasOptional(actor => actor.Movies);
         }
     }
 }

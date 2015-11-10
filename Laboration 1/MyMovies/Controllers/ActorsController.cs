@@ -20,6 +20,27 @@ namespace MyMovies.Controllers
             return View(context.Actors.OrderBy(actor => actor.Name).ToArray());
         }
 
+        // GET: Actors/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Actors/Create
+        [HttpPost]
+        public ActionResult Create(Actor actor)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Actors.Add(actor);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(actor);
+        }
+
         // GET: Actors/Edit/6
         public ActionResult Edit(int id)
         {

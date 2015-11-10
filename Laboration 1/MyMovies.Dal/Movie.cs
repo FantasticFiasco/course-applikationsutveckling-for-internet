@@ -9,6 +9,7 @@ namespace MyMovies.Dal
 
         public int Id { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         [Range(1900, 2020)]
