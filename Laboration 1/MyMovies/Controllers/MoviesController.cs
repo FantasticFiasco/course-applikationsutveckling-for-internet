@@ -7,45 +7,43 @@ namespace MyMovies.Controllers
 {
     public class MoviesController : Controller
     {
+        private readonly MoviesContext context;
+
+        public MoviesController()
+        {
+            context = new MoviesContext();
+        }
+
         // GET: Movies
         public ActionResult Index()
         {
-            using (var context = new MoviesContext())
-            {
-                return View(context.Movies.ToArray());
-            }
+            return View(context.Movies.ToArray());
         }
 
         // GET: Movies/Details/5
         public ActionResult Details(int id)
         {
-            using (var context = new MoviesContext())
-            {
-                Movie movie = context.Movies
-                    .Include(m => m.Actors)
-                    .SingleOrDefault(m => m.Id == id);
-                    
-                if (movie == null)
-                    return HttpNotFound();
+            Movie movie = context.Movies
+                .Include(m => m.Actors)
+                .SingleOrDefault(m => m.Id == id);
 
-                return View(movie);
-            }
+            if (movie == null)
+                return HttpNotFound();
+
+            return View(movie);
         }
 
         // GET: Movies/Edit/6
         public ActionResult Edit(int id)
         {
-            using (var context = new MoviesContext())
-            {
-                Movie movie = context.Movies
-                    .Include(m => m.Actors)
-                    .SingleOrDefault(m => m.Id == id);
+            Movie movie = context.Movies
+                .Include(m => m.Actors)
+                .SingleOrDefault(m => m.Id == id);
 
-                if (movie == null)
-                    return HttpNotFound();
+            if (movie == null)
+                return HttpNotFound();
 
-                return View(movie);
-            }
+            return View(movie);
         }
 
         // POST: Movies/Edit
@@ -54,13 +52,10 @@ namespace MyMovies.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new MoviesContext())
-                {
-                    context.Entry(movie).State = EntityState.Modified;
-                    context.SaveChanges();
-                }
+                context.Entry(movie).State = EntityState.Modified;
+                context.SaveChanges();
 
-                return RedirectToAction("Index");    
+                return RedirectToAction("Index");
             }
 
             return View(movie);
@@ -69,17 +64,14 @@ namespace MyMovies.Controllers
         // GET: Movies/Delete/5
         public ActionResult Delete(int id)
         {
-            using (var context = new MoviesContext())
-            {
-                Movie movie = context.Movies.Find(id);
-                if (movie == null)
-                    return HttpNotFound();
+            Movie movie = context.Movies.Find(id);
+            if (movie == null)
+                return HttpNotFound();
 
-                context.Movies.Remove(movie);
-                context.SaveChanges();
+            context.Movies.Remove(movie);
+            context.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Index");
         }
     }
 }
