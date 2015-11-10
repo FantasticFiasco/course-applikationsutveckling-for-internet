@@ -1,0 +1,27 @@
+﻿@using MyMovies.Dal
+@model IEnumerable<Actor>
+
+@{
+    ViewBag.Title = "Actors";
+}
+
+<h2>Actors</h2>
+
+<p>@Html.ActionLink("Create New", "Create")</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(actor => actor.Name)</th>
+        <th />
+    </tr>
+@foreach (Actor actor in Model)
+{
+    <tr>
+        <td>@actor.Name</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = actor.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = actor.Id })
+        </td>
+    </tr>
+}
+</table>

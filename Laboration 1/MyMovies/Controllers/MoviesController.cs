@@ -17,7 +17,7 @@ namespace MyMovies.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            return View(context.Movies.ToArray());
+            return View(context.Movies.OrderByDescending(movie => movie.Rating).ToArray());
         }
 
         // GET: Movies/Details/5
