@@ -8,9 +8,10 @@
 <h2>@Model.Title</h2>
 
 <ul>
-    <li>@Html.DisplayNameFor(movie => movie.Rating): @Model.Rating</li>
+    <li>@Html.DisplayNameFor(movie => movie.Genre): @Model.Genre.Name</li>
     <li>@Html.DisplayNameFor(movie => movie.Year): @Model.Year</li>
-    <li>@Html.DisplayNameFor(movie => movie.Actors): @Model.Actors</li>
+    <li>@Html.DisplayNameFor(movie => movie.Rating): @Model.Rating</li>
+    <li>@Html.DisplayNameFor(movie => movie.Cast): @Model.Cast</li>
 </ul>
 
 <p>

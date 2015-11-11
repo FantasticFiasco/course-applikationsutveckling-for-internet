@@ -50,9 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
-    <Compile Include="EntityConfigurations\ActorConfiguration.cs" />
-    <Compile Include="EntityConfigurations\MovieConfiguration.cs" />
+    <Compile Include="Genre.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MoviesContext.cs" />
     <Compile Include="MoviesContextInitializer.cs" />

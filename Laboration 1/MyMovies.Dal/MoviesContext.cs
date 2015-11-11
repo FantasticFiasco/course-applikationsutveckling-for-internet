@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using MyMovies.Dal.EntityConfigurations;
 
 namespace MyMovies.Dal
 {
@@ -7,12 +6,17 @@ namespace MyMovies.Dal
     {
         public virtual IDbSet<Movie> Movies { get; set; }
 
-        public virtual IDbSet<Actor> Actors { get; set; }
+        public virtual IDbSet<Genre> Genre { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new MovieConfiguration());
-            modelBuilder.Configurations.Add(new ActorConfiguration());
+            modelBuilder
+                .Entity<Movie>()
+                .HasRequired(movie => movie.Genre);
+
+            modelBuilder
+                .Entity<Genre>()
+                .HasMany(genre => genre.Movies);
         }
     }
 }
