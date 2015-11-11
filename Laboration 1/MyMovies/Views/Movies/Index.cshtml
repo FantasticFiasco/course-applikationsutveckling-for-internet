@@ -12,16 +12,8 @@
 @using (Html.BeginForm())
 {
     <p>
-        Search: @Html.TextBox("SearchText")
+        Search: @Html.TextBox("SearchText") @Html.DropDownList("GenreFilter", ViewBag.Genre as IEnumerable<SelectListItem>)
         <input type="submit" value="Search" />
-    </p>
-}
-
-@using (Html.BeginForm())
-{
-    <p>
-        Filter: @Html.DropDownList("GenreFilter", ViewBag.Genre as IEnumerable<SelectListItem>)
-        <input type="submit" value="Filter" />
     </p>
 }
 
