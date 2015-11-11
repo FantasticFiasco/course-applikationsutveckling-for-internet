@@ -2,10 +2,10 @@
 @model MovieViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit Movie</h2>
+<h2>Create Movie</h2>
 
 @using (Html.BeginForm())
 {
@@ -17,7 +17,7 @@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.Genre, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,7 +33,7 @@
                 @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.Rating, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -41,7 +41,7 @@
                 @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.Cast, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,7 +49,7 @@
                 @Html.ValidationMessageFor(model => model.Cast, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

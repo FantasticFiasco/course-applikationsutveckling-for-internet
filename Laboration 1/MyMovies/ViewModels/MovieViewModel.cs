@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace MyMovies.ViewModels
 {
-    public class EditMovieViewModel
+    public class MovieViewModel
     {
         public int Id { get; set; }
 

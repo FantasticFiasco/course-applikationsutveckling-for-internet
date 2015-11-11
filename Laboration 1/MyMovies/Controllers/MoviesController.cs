@@ -26,6 +26,42 @@ namespace MyMovies.Controllers
             return View(orderedMovies);
         }
 
+        // GET: Movies/Create
+        public ActionResult Create()
+        {
+            var editMovieViewModel = new MovieViewModel
+            {
+                Genre = CreateGenreSelectList()
+            };
+
+            return View(editMovieViewModel);
+        }
+
+        // POST: Movies/Create
+        [HttpPost]
+        public ActionResult Create(MovieViewModel movieViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var movie = new Movie
+                {
+                    Title = movieViewModel.Title,
+                    GenreId = movieViewModel.SelectedGenreId,
+                    Year = movieViewModel.Year,
+                    Rating = movieViewModel.Rating,
+                    Cast = movieViewModel.Cast
+                };
+
+                context.Movies.Add(movie);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            movieViewModel.Genre = CreateGenreSelectList();
+            return View(movieViewModel);
+        }
+
         // GET: Movies/Details/5
         public ActionResult Details(int id)
         {
@@ -49,7 +85,7 @@ namespace MyMovies.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var editMovieViewModel = new EditMovieViewModel
+            var editMovieViewModel = new MovieViewModel
             {
                 Id = movie.Id,
                 Title = movie.Title,
@@ -65,28 +101,28 @@ namespace MyMovies.Controllers
 
         // POST: Movies/Edit
         [HttpPost]
-        public ActionResult Edit(EditMovieViewModel editMovieViewModel)
+        public ActionResult Edit(MovieViewModel movieViewModel)
         {
             if (ModelState.IsValid)
             {
-                Movie movie = context.Movies.Find(editMovieViewModel.Id);
+                Movie movie = context.Movies.Find(movieViewModel.Id);
 
                 if (movie == null)
                     return HttpNotFound();
 
-                movie.Title = editMovieViewModel.Title;
-                movie.GenreId = editMovieViewModel.SelectedGenreId;
-                movie.Year = editMovieViewModel.Year;
-                movie.Rating = editMovieViewModel.Rating;
-                movie.Cast = editMovieViewModel.Cast;
+                movie.Title = movieViewModel.Title;
+                movie.GenreId = movieViewModel.SelectedGenreId;
+                movie.Year = movieViewModel.Year;
+                movie.Rating = movieViewModel.Rating;
+                movie.Cast = movieViewModel.Cast;
 
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            editMovieViewModel.Genre = CreateGenreSelectList();
-            return View(editMovieViewModel);
+            movieViewModel.Genre = CreateGenreSelectList();
+            return View(movieViewModel);
         }
 
         // GET: Movies/Delete/5
