@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -22,8 +23,26 @@ namespace MyMovies.Controllers
         }
 
         // GET: Movies
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string currentFilter, string filter)
         {
+            IEnumerable<Movie> movies = context.Movies;
+
+            // Filtering
+            if (filter == null)
+            {
+                filter = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = filter;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                movies = movies.Where(movie =>
+                    movie.Title.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1 ||
+                    movie.Year.ToString().IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1);
+            }
+
+            // Sort order
             ViewBag.RatingSortDirection = sortOrder == RatingSortDescending ?
                 RatingSortAscending :
                 RatingSortDescending;
@@ -31,9 +50,7 @@ namespace MyMovies.Controllers
             ViewBag.TitleSortDirection = sortOrder == TitleSortDescending ?
                 RatingSortAscending :
                 TitleSortDescending;
-
-            IEnumerable<Movie> movies = context.Movies;
-
+            
             switch (sortOrder)
             {
                 case TitleSortDescending:
@@ -173,7 +190,6 @@ namespace MyMovies.Controllers
             IEnumerable<SelectListItem> genre = context.Genre.Select(
                 g => new SelectListItem
                 {
-// ReSharper disable once SpecifyACultureInStringConversionExplicitly
                     Value = g.Id.ToString(),
                     Text = g.Name
                 });
