@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using MyMovies.Dal;
 using MyMovies.ViewModels;
@@ -23,26 +24,27 @@ namespace MyMovies.Controllers
         }
 
         // GET: Movies
-        public ActionResult Index(string sortOrder, string currentFilter, string filter)
+        public ActionResult Index(string currentGenreFilter, string genreFilter, string sortOrder, string currentSearchText, string searchText)
         {
             IEnumerable<Movie> movies = context.Movies;
 
-            // Filtering
-            if (filter == null)
+            // Genre filter
+            if (genreFilter == null)
             {
-                filter = currentFilter;
+                genreFilter = currentGenreFilter;
             }
 
-            ViewBag.CurrentFilter = filter;
+            ViewBag.CurrentGenreFilter = genreFilter;
 
-            if (!string.IsNullOrEmpty(filter))
+            int genreId;
+            if (int.TryParse(genreFilter, out genreId))
             {
-                movies = movies.Where(movie =>
-                    movie.Title.IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1 ||
-                    movie.Year.ToString().IndexOf(filter, StringComparison.OrdinalIgnoreCase) != -1);
+                movies = movies.Where(movie => movie.GenreId == genreId);
             }
 
-            // Sort order
+            ViewBag.Genre = CreateGenreSelectList();
+
+            // Sort
             ViewBag.RatingSortDirection = sortOrder == RatingSortDescending ?
                 RatingSortAscending :
                 RatingSortDescending;
@@ -50,7 +52,7 @@ namespace MyMovies.Controllers
             ViewBag.TitleSortDirection = sortOrder == TitleSortDescending ?
                 RatingSortAscending :
                 TitleSortDescending;
-            
+
             switch (sortOrder)
             {
                 case TitleSortDescending:
@@ -60,7 +62,7 @@ namespace MyMovies.Controllers
                 case TitleSortAscending:
                     movies = movies.OrderBy(movie => movie.Title);
                     break;
-                
+
                 case RatingSortAscending:
                     movies = movies.OrderBy(movie => movie.Rating);
                     break;
@@ -68,6 +70,21 @@ namespace MyMovies.Controllers
                 default:
                     movies = movies.OrderByDescending(movie => movie.Rating);
                     break;
+            }
+
+            // Search
+            if (searchText == null)
+            {
+                searchText = currentSearchText;
+            }
+
+            ViewBag.CurrentSearchText = searchText;
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                movies = movies.Where(movie =>
+                    movie.Title.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1 ||
+                    movie.Year.ToString().IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1);
             }
 
             return View(movies.ToArray());
@@ -187,6 +204,11 @@ namespace MyMovies.Controllers
 
         private SelectList CreateGenreSelectList()
         {
+            IEnumerable<SelectListItem> empty = new[]
+            {
+                new SelectListItem()
+            };
+
             IEnumerable<SelectListItem> genre = context.Genre.Select(
                 g => new SelectListItem
                 {
@@ -194,7 +216,7 @@ namespace MyMovies.Controllers
                     Text = g.Name
                 });
 
-            return new SelectList(genre, "Value", "Text");
+            return new SelectList(empty.Concat(genre), "Value", "Text");
         }
     }
 }

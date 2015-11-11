@@ -10,6 +10,7 @@ namespace MyMovies.ViewModels
         [Required]
         public string Title { get; set; }
 
+        [Display(Name = "Genre")]
         public int SelectedGenreId { get; set; }
 
         public SelectList Genre { get; set; }
