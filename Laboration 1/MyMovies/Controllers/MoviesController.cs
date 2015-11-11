@@ -9,6 +9,11 @@ namespace MyMovies.Controllers
 {
     public class MoviesController : Controller
     {
+        private const string TitleSortDescending = "TitleSortDescending";
+        private const string TitleSortAscending = "TitleSortAscending";
+        private const string RatingSortDescending = null;
+        private const string RatingSortAscending = "RatingSortAscending";
+
         private readonly MoviesContext context;
 
         public MoviesController()
@@ -17,13 +22,38 @@ namespace MyMovies.Controllers
         }
 
         // GET: Movies
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            IEnumerable<Movie> orderedMovies = context.Movies
-                .OrderByDescending(movie => movie.Rating)
-                .ToArray();
+            ViewBag.RatingSortDirection = sortOrder == RatingSortDescending ?
+                RatingSortAscending :
+                RatingSortDescending;
 
-            return View(orderedMovies);
+            ViewBag.TitleSortDirection = sortOrder == TitleSortDescending ?
+                RatingSortAscending :
+                TitleSortDescending;
+
+            IEnumerable<Movie> movies = context.Movies;
+
+            switch (sortOrder)
+            {
+                case TitleSortDescending:
+                    movies = movies.OrderByDescending(movie => movie.Title);
+                    break;
+
+                case TitleSortAscending:
+                    movies = movies.OrderBy(movie => movie.Title);
+                    break;
+                
+                case RatingSortAscending:
+                    movies = movies.OrderBy(movie => movie.Rating);
+                    break;
+
+                default:
+                    movies = movies.OrderByDescending(movie => movie.Rating);
+                    break;
+            }
+
+            return View(movies.ToArray());
         }
 
         // GET: Movies/Create

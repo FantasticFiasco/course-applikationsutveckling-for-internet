@@ -11,8 +11,8 @@
 
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(movie => movie.Title)</th>
-        <th>@Html.DisplayNameFor(movie => movie.Rating)</th>
+        <th>@Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortDirection })</th>
+        <th>@Html.ActionLink("Rating", "Index", new { sortOrder = ViewBag.RatingSortDirection })</th>
         <th />
     </tr>
 @foreach (Movie movie in Model)
