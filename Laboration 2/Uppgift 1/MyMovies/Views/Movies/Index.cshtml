@@ -1,0 +1,38 @@
+﻿@using MyMovies.Dal
+@model IEnumerable<Movie>
+
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2>Movies</h2>
+
+<p>@Html.ActionLink("Create New", "Create")</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search: @Html.TextBox("SearchText") @Html.DropDownList("GenreFilter", ViewBag.Genre as IEnumerable<SelectListItem>)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>@Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortDirection, currentSearchText = ViewBag.CurrentSearchText, currentGenreFilter = ViewBag.CurrentGenreFilter })</th>
+        <th>@Html.ActionLink("Rating", "Index", new { sortOrder = ViewBag.RatingSortDirection, currentSearchText = ViewBag.CurrentSearchText, currentGenreFilter = ViewBag.CurrentGenreFilter })</th>
+        <th />
+    </tr>
+@foreach (Movie movie in Model)
+{
+    <tr>
+        <td>@movie.Title</td>
+        <td>@movie.Rating</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = movie.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = movie.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = movie.Id })
+        </td>
+    </tr>
+}
+</table>
