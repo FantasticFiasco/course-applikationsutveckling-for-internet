@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using MyMovies.Dal;
+using MyMovies.Models;
 using MyMovies.ViewModels;
 
 namespace MyMovies.Controllers
@@ -129,7 +128,7 @@ namespace MyMovies.Controllers
         public ActionResult Details(int id)
         {
             Movie movie = context.Movies
-                .Include(m => m.Genre)
+                .Include("Genre")
                 .SingleOrDefault(m => m.Id == id);
 
             if (movie == null)
@@ -142,7 +141,7 @@ namespace MyMovies.Controllers
         public ActionResult Edit(int id)
         {
             Movie movie = context.Movies
-                .Include(m => m.Genre)
+                .Include("Genre")
                 .SingleOrDefault(m => m.Id == id);
 
             if (movie == null)
