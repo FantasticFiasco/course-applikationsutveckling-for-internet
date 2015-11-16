@@ -1,5 +1,5 @@
-﻿@using MyMovies.Models
-@model IEnumerable<Movie>
+﻿@using MyMovies.ViewModels
+@model IEnumerable<IndexMovieViewModel>
 
 @{
     ViewBag.Title = "Movies";
@@ -24,17 +24,17 @@
         <th>Genre</th>
         <th />
     </tr>
-@foreach (Movie movie in Model)
-{
-    <tr>
-        <td>@movie.Title</td>
-        <td>@movie.Rating</td>
-        <td>@movie.Genre.Name</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = movie.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = movie.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = movie.Id })
-        </td>
-    </tr>
-}
+    @foreach (IndexMovieViewModel movie in Model)
+    {
+        <tr>
+            <td>@movie.Title</td>
+            <td>@movie.Rating</td>
+            <td>@movie.Genre</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = movie.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = movie.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = movie.Id })
+            </td>
+        </tr>
+    }
 </table>

@@ -1,12 +1,10 @@
-﻿namespace MyMovies.Models
+﻿namespace MyMovies.ViewModels
 {
-    public class Movie
+    public class DetailsMovieViewModel
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
 
-        public int GenreId { get; set; }
+        public string Genre { get; set; }
 
         public int Year { get; set; }
 
