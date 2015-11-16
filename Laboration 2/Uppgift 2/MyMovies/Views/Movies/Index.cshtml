@@ -19,9 +19,9 @@
 
 <table class="table">
     <tr>
-        <th>Title</th>
-        <th>Rating</th>
-        <th>Genre</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Rating)</th>
+        <th>@Html.DisplayNameFor(model => model.Genre)</th>
         <th />
     </tr>
     @foreach (IndexMovieViewModel movie in Model)
