@@ -22,7 +22,6 @@ namespace MyMovies.Controllers
         public ActionResult Index(string genreFilter)
         {
             IEnumerable<Movie> movies;
-            SelectList genre = CreateGenreSelectList();
 
             // Genre filter
             int genreId;
@@ -35,9 +34,9 @@ namespace MyMovies.Controllers
                 movies = movieRepository.Get();
             }
 
-            ViewBag.Genre = genre;
+            ViewBag.Genre = CreateGenreSelectList();
 
-            return View(ToIndexMovieViewModels(movies, genre));
+            return View(ToIndexMovieViewModels(movies));
         }
 
         // GET: Movies/Create
@@ -75,7 +74,7 @@ namespace MyMovies.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            return View(DetailsMovieViewModel(movie, CreateGenreSelectList()));
+            return View(DetailsMovieViewModel(movie));
         }
 
         // GET: Movies/Edit/6
@@ -160,27 +159,23 @@ namespace MyMovies.Controllers
             };
         }
 
-        private static IEnumerable<IndexMovieViewModel> ToIndexMovieViewModels(
-            IEnumerable<Movie> movies,
-            IEnumerable<SelectListItem> genre)
+        private IEnumerable<IndexMovieViewModel> ToIndexMovieViewModels(IEnumerable<Movie> movies)
         {
             return movies.Select(movie => new IndexMovieViewModel
             {
                 Id = movie.Id,
                 Title = movie.Title,
-                Genre = genre.Single(g => g.Value == movie.GenreId.ToString()).Text,
+                Genre = genreRepository.Find(movie.GenreId).Name,
                 Rating = movie.Rating
             });
         }
 
-        private DetailsMovieViewModel DetailsMovieViewModel(
-            Movie movie,
-            IEnumerable<SelectListItem> genre)
+        private DetailsMovieViewModel DetailsMovieViewModel(Movie movie)
         {
             return new DetailsMovieViewModel
             {
                 Title = movie.Title,
-                Genre = genre.Single(g => g.Value == movie.GenreId.ToString()).Text,
+                Genre = genreRepository.Find(movie.GenreId).Name,
                 Rating = movie.Rating,
                 Year = movie.Year,
                 Cast = movie.Cast
