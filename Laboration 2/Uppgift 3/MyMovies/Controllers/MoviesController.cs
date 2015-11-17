@@ -29,13 +29,20 @@ namespace MyMovies.Controllers
 
             ViewBag.Genre = CreateGenreSelectList();
 
-            return View(movies.ToArray());
+            return View(movies.Select(movie =>
+                new IndexMovieViewModel
+                {
+                    Id = movie.Id,
+                    Title = movie.Title,
+                    Genre = movie.Genre.Name,
+                    Rating = movie.Rating
+                 }));
         }
 
         // GET: Movies/Create
         public ActionResult Create()
         {
-            var editMovieViewModel = new MovieViewModel
+            var editMovieViewModel = new CreateMovieViewModel
             {
                 Genre = CreateGenreSelectList()
             };
@@ -45,7 +52,7 @@ namespace MyMovies.Controllers
 
         // POST: Movies/Create
         [HttpPost]
-        public ActionResult Create(MovieViewModel movieViewModel)
+        public ActionResult Create(CreateMovieViewModel movieViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +85,14 @@ namespace MyMovies.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            return View(movie);
+            return View(new DetailsMovieViewModel
+            {
+                Title = movie.Title,
+                Genre = movie.Genre.Name,
+                Year = movie.Year,
+                Rating = movie.Rating,
+                Cast = movie.Cast
+            });
         }
 
         // GET: Movies/Edit/6
@@ -91,7 +105,7 @@ namespace MyMovies.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var editMovieViewModel = new MovieViewModel
+            var editMovieViewModel = new EditMovieViewModel
             {
                 Id = movie.Id,
                 Title = movie.Title,
@@ -107,7 +121,7 @@ namespace MyMovies.Controllers
 
         // POST: Movies/Edit
         [HttpPost]
-        public ActionResult Edit(MovieViewModel movieViewModel)
+        public ActionResult Edit(EditMovieViewModel movieViewModel)
         {
             if (ModelState.IsValid)
             {

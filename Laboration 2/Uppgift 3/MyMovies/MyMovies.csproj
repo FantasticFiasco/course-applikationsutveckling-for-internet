@@ -156,7 +156,10 @@
       <DependentUpon>MoviesModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\MovieViewModel.cs" />
+    <Compile Include="ViewModels\CreateMovieViewModel.cs" />
+    <Compile Include="ViewModels\DetailsMovieViewModel.cs" />
+    <Compile Include="ViewModels\EditMovieViewModel.cs" />
+    <Compile Include="ViewModels\IndexMovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

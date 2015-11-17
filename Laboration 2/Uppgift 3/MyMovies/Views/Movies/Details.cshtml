@@ -1,5 +1,5 @@
-﻿@using MyMovies.Models
-@model Movie
+﻿@using MyMovies.ViewModels
+@model DetailsMovieViewModel
 
 @{
     ViewBag.Title = @Model.Title;
@@ -8,7 +8,7 @@
 <h2>@Model.Title</h2>
 
 <ul>
-    <li>@Html.DisplayNameFor(movie => movie.Genre): @Model.Genre.Name</li>
+    <li>@Html.DisplayNameFor(movie => movie.Genre): @Model.Genre</li>
     <li>@Html.DisplayNameFor(movie => movie.Year): @Model.Year</li>
     <li>@Html.DisplayNameFor(movie => movie.Rating): @Model.Rating</li>
     <li>@Html.DisplayNameFor(movie => movie.Cast): @Model.Cast</li>
