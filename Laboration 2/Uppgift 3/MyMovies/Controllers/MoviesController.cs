@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using MyMovies.Models;
 using MyMovies.ViewModels;
 
@@ -25,29 +27,17 @@ namespace MyMovies.Controllers
             if (int.TryParse(genreFilter, out genreId))
             {
                 movies = movies.Where(movie => movie.GenreId == genreId);
-            }    
+            }
 
-            ViewBag.Genre = CreateGenreSelectList();
+            ViewBag.Genre = GenreSelectListFactory.Create();
 
-            return View(movies.Select(movie =>
-                new IndexMovieViewModel
-                {
-                    Id = movie.Id,
-                    Title = movie.Title,
-                    Genre = movie.Genre.Name,
-                    Rating = movie.Rating
-                 }));
+            return View(Mapper.Map<IEnumerable<IndexMovieViewModel>>(movies));
         }
 
         // GET: Movies/Create
         public ActionResult Create()
         {
-            var editMovieViewModel = new CreateMovieViewModel
-            {
-                Genre = CreateGenreSelectList()
-            };
-
-            return View(editMovieViewModel);
+            return View(Mapper.Map<CreateMovieViewModel>(new Movie()));
         }
 
         // POST: Movies/Create
@@ -56,14 +46,7 @@ namespace MyMovies.Controllers
         {
             if (ModelState.IsValid)
             {
-                var movie = new Movie
-                {
-                    Title = movieViewModel.Title,
-                    GenreId = movieViewModel.SelectedGenreId,
-                    Year = movieViewModel.Year,
-                    Rating = movieViewModel.Rating,
-                    Cast = movieViewModel.Cast
-                };
+                var movie = Mapper.Map<Movie>(movieViewModel);
 
                 context.Movies.Add(movie);
                 context.SaveChanges();
@@ -71,7 +54,7 @@ namespace MyMovies.Controllers
                 return RedirectToAction("Index");
             }
 
-            movieViewModel.Genre = CreateGenreSelectList();
+            movieViewModel.Genre = GenreSelectListFactory.Create();
             return View(movieViewModel);
         }
 
@@ -85,14 +68,7 @@ namespace MyMovies.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            return View(new DetailsMovieViewModel
-            {
-                Title = movie.Title,
-                Genre = movie.Genre.Name,
-                Year = movie.Year,
-                Rating = movie.Rating,
-                Cast = movie.Cast
-            });
+            return View(Mapper.Map<DetailsMovieViewModel>(movie));
         }
 
         // GET: Movies/Edit/6
@@ -105,18 +81,7 @@ namespace MyMovies.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var editMovieViewModel = new EditMovieViewModel
-            {
-                Id = movie.Id,
-                Title = movie.Title,
-                SelectedGenreId = movie.GenreId,
-                Genre = CreateGenreSelectList(),
-                Year = movie.Year,
-                Rating = movie.Rating,
-                Cast = movie.Cast
-            };
-
-            return View(editMovieViewModel);
+            return View(Mapper.Map<EditMovieViewModel>(movie));
         }
 
         // POST: Movies/Edit
@@ -125,23 +90,15 @@ namespace MyMovies.Controllers
         {
             if (ModelState.IsValid)
             {
-                Movie movie = context.Movies.Find(movieViewModel.Id);
-
-                if (movie == null)
-                    return HttpNotFound();
-
-                movie.Title = movieViewModel.Title;
-                movie.GenreId = movieViewModel.SelectedGenreId;
-                movie.Year = movieViewModel.Year;
-                movie.Rating = movieViewModel.Rating;
-                movie.Cast = movieViewModel.Cast;
-
+                var movie = Mapper.Map<Movie>(movieViewModel);
+                
+                context.Entry(movie).State = EntityState.Modified;
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            movieViewModel.Genre = CreateGenreSelectList();
+            movieViewModel.Genre = GenreSelectListFactory.Create();
             return View(movieViewModel);
         }
 
@@ -156,23 +113,6 @@ namespace MyMovies.Controllers
             context.SaveChanges();
 
             return RedirectToAction("Index");
-        }
-
-        private SelectList CreateGenreSelectList()
-        {
-            IEnumerable<SelectListItem> empty = new[]
-            {
-                new SelectListItem()
-            };
-
-            IEnumerable<SelectListItem> genre = context.Genre.Select(
-                g => new SelectListItem
-                {
-                    Value = g.Id.ToString(),
-                    Text = g.Name
-                });
-
-            return new SelectList(empty.Concat(genre), "Value", "Text");
         }
     }
 }

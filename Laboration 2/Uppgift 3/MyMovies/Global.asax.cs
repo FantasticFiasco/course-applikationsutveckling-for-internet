@@ -10,6 +10,7 @@ namespace MyMovies
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperConfiguration.Configure();
         }
     }
 }
