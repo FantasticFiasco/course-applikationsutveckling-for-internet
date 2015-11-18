@@ -166,6 +166,7 @@
     <Compile Include="ViewModels\EditMovieViewModel.cs" />
     <Compile Include="ViewModels\GenreSelectListFactory.cs" />
     <Compile Include="ViewModels\IndexMovieViewModel.cs" />
+    <Compile Include="ViewModels\IndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

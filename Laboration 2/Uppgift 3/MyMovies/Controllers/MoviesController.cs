@@ -29,9 +29,11 @@ namespace MyMovies.Controllers
                 movies = movies.Where(movie => movie.GenreId == genreId);
             }
 
-            ViewBag.Genre = GenreSelectListFactory.Create();
-
-            return View(Mapper.Map<IEnumerable<IndexMovieViewModel>>(movies));
+            return View(new IndexViewModel
+            {
+                Movies = Mapper.Map<IEnumerable<IndexMovieViewModel>>(movies),
+                Genre = GenreSelectListFactory.Create()
+            });
         }
 
         // GET: Movies/Create

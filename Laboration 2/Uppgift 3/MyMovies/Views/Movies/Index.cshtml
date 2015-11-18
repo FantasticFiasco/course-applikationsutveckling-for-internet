@@ -1,5 +1,5 @@
 ﻿@using MyMovies.ViewModels
-@model IEnumerable<IndexMovieViewModel>
+@model IndexViewModel
 
 @{
     ViewBag.Title = "Movies";
@@ -12,19 +12,19 @@
 @using (Html.BeginForm())
 {
     <p>
-        @Html.DropDownList("GenreFilter", ViewBag.Genre as IEnumerable<SelectListItem>)
+        @Html.DropDownList("GenreFilter", Model.Genre)
         <input type="submit" value="Filter" />
     </p>
 }
 
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.Title)</th>
-        <th>@Html.DisplayNameFor(model => model.Rating)</th>
-        <th>@Html.DisplayNameFor(model => model.Genre)</th>
+        <th>Title</th>
+        <th>Rating</th>
+        <th>Genre</th>
         <th />
     </tr>
-@foreach (IndexMovieViewModel movie in Model)
+@foreach (IndexMovieViewModel movie in Model.Movies)
 {
     <tr>
         <td>@movie.Title</td>
