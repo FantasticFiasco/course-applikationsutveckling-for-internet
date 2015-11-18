@@ -56,10 +56,10 @@ namespace MyMovies
 
         private static void ConfigureIndexMovieViewModel()
         {
-            Mapper.CreateMap<Movie, IndexMovieViewModel>()
+            Mapper.CreateMap<MovieByGenre, IndexMovieViewModel>()
                 .ForMember(
                     movieViewModel => movieViewModel.Genre,
-                    options => options.MapFrom(movie => movie.Genre.Name));
+                    options => options.MapFrom(movie => movie.Name));
         }
     }
 }

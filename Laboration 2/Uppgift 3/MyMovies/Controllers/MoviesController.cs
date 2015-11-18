@@ -20,15 +20,10 @@ namespace MyMovies.Controllers
         // GET: Movies
         public ActionResult Index(string genreFilter)
         {
-            IEnumerable<Movie> movies = context.Movies;
-
-            // Genre filter
             int genreId;
-            if (int.TryParse(genreFilter, out genreId))
-            {
-                movies = movies.Where(movie => movie.GenreId == genreId);
-            }
-
+            bool success = int.TryParse(genreFilter, out genreId);
+            IEnumerable<MovieByGenre> movies = context.MoviesByGenre(success ? (int?)genreId : null);
+            
             return View(new IndexViewModel
             {
                 Movies = Mapper.Map<IEnumerable<IndexMovieViewModel>>(movies),

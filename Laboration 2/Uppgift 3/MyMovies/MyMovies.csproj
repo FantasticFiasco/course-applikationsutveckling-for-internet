@@ -145,6 +145,9 @@
     <Compile Include="Models\Movie.cs">
       <DependentUpon>MoviesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MovieByGenre.cs">
+      <DependentUpon>MoviesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MoviesModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -12,6 +12,8 @@ namespace MyMovies.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MoviesContext : DbContext
     {
@@ -27,5 +29,14 @@ namespace MyMovies.Models
     
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
+    
+        public virtual ObjectResult<MovieByGenre> MoviesByGenre(Nullable<int> genreId)
+        {
+            var genreIdParameter = genreId.HasValue ?
+                new ObjectParameter("genreId", genreId) :
+                new ObjectParameter("genreId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MovieByGenre>("MoviesByGenre", genreIdParameter);
+        }
     }
 }
