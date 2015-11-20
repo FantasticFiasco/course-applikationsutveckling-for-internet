@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using PersonRegistry.ViewModels;
 
 namespace PersonRegistry.Controllers
 {
@@ -7,7 +9,7 @@ namespace PersonRegistry.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return View(Enumerable.Empty<IndexPersonViewModel>());
         }
     }
 }

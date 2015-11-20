@@ -1,7 +1,28 @@
-﻿@model dynamic
+﻿@using PersonRegistry.ViewModels
+@model IEnumerable<IndexPersonViewModel>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Person Registry";
 }
 
-<h2>title</h2>
+<h2>Person Registry</h2>
+
+<p>@Html.ActionLink("Create New", "Create")</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.Surname)</th>
+        <th>@Html.DisplayNameFor(model => model.Street)</th>
+        <th>@Html.DisplayNameFor(model => model.City)</th>
+    </tr>
+@foreach (IndexPersonViewModel person in Model)
+{
+    <tr>
+        <td>@person.FirstName</td>
+        <td>@person.Surname</td>
+        <td>@person.Street</td>
+        <td>@person.City</td>
+    </tr>
+}
+</table>
