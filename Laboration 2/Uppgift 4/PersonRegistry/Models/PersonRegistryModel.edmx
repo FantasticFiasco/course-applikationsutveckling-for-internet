@@ -48,16 +48,16 @@
           <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AddressId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PersonRepositoryContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
-          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PersonRegistryModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="PersonRegistryModelStoreContainer" CdmEntityContainer="PersonRepositoryContext">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="PersonRegistryModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -67,7 +67,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="People">
+          <EntitySetMapping Name="Persons">
             <EntityTypeMapping TypeName="PersonRegistryModel.Person">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="Id" ColumnName="Id" />

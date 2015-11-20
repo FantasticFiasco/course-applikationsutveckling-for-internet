@@ -13,10 +13,10 @@ namespace PersonRegistry.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class PersonRepositoryContext : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public PersonRepositoryContext()
+            : base("name=PersonRepositoryContext")
         {
         }
     
@@ -26,6 +26,6 @@ namespace PersonRegistry.Models
         }
     
         public virtual DbSet<Address> Addresses { get; set; }
-        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
     }
 }

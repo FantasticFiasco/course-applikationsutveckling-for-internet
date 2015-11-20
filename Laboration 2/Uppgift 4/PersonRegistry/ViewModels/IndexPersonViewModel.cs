@@ -8,8 +8,6 @@
 
         public string Surname { get; set; }
 
-        public int AddressId { get; set; }
-
         public string Street { get; set; }
 
         public string City { get; set; }
