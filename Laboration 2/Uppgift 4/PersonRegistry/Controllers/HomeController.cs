@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace PersonRegister.Controllers
+namespace PersonRegistry.Controllers
 {
     public class HomeController : Controller
     {

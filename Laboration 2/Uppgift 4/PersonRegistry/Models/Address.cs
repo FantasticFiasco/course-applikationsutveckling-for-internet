@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PersonRegister.Models
+namespace PersonRegistry.Models
 {
     using System;
     using System.Collections.Generic;
