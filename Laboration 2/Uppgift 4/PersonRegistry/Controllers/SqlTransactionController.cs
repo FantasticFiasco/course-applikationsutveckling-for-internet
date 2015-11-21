@@ -20,7 +20,7 @@ namespace PersonRegistry.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            IEnumerable<IndexPersonViewModel> personViewModels = context.Persons.Select(CreateIndexPersonViewModel);
+            IEnumerable<PersonViewModel> personViewModels = context.Persons.Select(CreatePersonViewModel);
             
             return View(personViewModels);
         }
@@ -33,7 +33,7 @@ namespace PersonRegistry.Controllers
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(CreatePersonViewModel viewModel)
+        public ActionResult Create(PersonViewModel personViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -41,11 +41,11 @@ namespace PersonRegistry.Controllers
                 {
                     context.AddPersonWithAddress(
                         Guid.NewGuid(),
-                        viewModel.FirstName,
-                        viewModel.Surname,
+                        personViewModel.FirstName,
+                        personViewModel.Surname,
                         Guid.NewGuid(),
-                        viewModel.Street,
-                        viewModel.City);
+                        personViewModel.Street,
+                        personViewModel.City);
 
                     return Redirect("Index");
                 }
@@ -55,14 +55,14 @@ namespace PersonRegistry.Controllers
                 }
             }
 
-            return View(viewModel);
+            return View(personViewModel);
         }
 
-        private IndexPersonViewModel CreateIndexPersonViewModel(Person person)
+        private PersonViewModel CreatePersonViewModel(Person person)
         {
             Address address = context.Addresses.Find(person.AddressId);
 
-            return new IndexPersonViewModel
+            return new PersonViewModel
             {
                 FirstName = person.FirstName,
                 Surname = person.Surname,

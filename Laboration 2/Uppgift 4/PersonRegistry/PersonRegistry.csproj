@@ -49,6 +49,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -94,6 +95,10 @@
     <Content Include="App_Data\PersonRegistry_log.ldf">
       <DependentUpon>PersonRegistry.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\PetRegistry.mdf" />
+    <Content Include="App_Data\PetRegistry_log.ldf">
+      <DependentUpon>PetRegistry.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -108,6 +113,16 @@
       <DependentUpon>PersonRegistryModel.edmx</DependentUpon>
       <LastGenOutput>PersonRegistryModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\PetRegistryModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PetRegistryModel.edmx</DependentUpon>
+      <LastGenOutput>PetRegistryModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PetRegistryModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PetRegistryModel.edmx</DependentUpon>
+      <LastGenOutput>PetRegistryModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\PersonRegistryModel.edmx">
@@ -116,6 +131,13 @@
     </EntityDeploy>
     <Content Include="Models\PersonRegistryModel.edmx.diagram">
       <DependentUpon>PersonRegistryModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\PetRegistryModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PetRegistryModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PetRegistryModel.edmx.diagram">
+      <DependentUpon>PetRegistryModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -127,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EntityFrameworkTransactionController.cs" />
     <Compile Include="Controllers\SqlTransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -152,9 +175,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PersonRegistryModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Pet.cs">
+      <DependentUpon>PetRegistryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PetRegistryModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PetRegistryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PetRegistryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PetRegistryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PetRegistryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PetRegistryModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CreatePersonViewModel.cs" />
-    <Compile Include="ViewModels\IndexPersonViewModel.cs" />
+    <Compile Include="ViewModels\PetViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -164,6 +205,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\SqlTransaction\Create.cshtml" />
+    <Content Include="Views\EntityFrameworkTransaction\Index.cshtml" />
+    <Content Include="Views\EntityFrameworkTransaction\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

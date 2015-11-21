@@ -1,5 +1,5 @@
 ﻿@using PersonRegistry.ViewModels
-@model IEnumerable<IndexPersonViewModel>
+@model IEnumerable<PersonViewModel>
 
 @{
     ViewBag.Title = "Person Registry";
@@ -16,7 +16,7 @@
         <th>@Html.DisplayNameFor(model => model.Street)</th>
         <th>@Html.DisplayNameFor(model => model.City)</th>
     </tr>
-@foreach (IndexPersonViewModel person in Model)
+@foreach (PersonViewModel person in Model)
 {
     <tr>
         <td>@person.FirstName</td>

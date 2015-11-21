@@ -2,9 +2,9 @@
 
 namespace PersonRegistry.ViewModels
 {
-    public class CreatePersonViewModel
+    public class PersonViewModel
     {
-        [Display(Name = "First name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         public string Surname { get; set; }

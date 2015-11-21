@@ -1,0 +1,26 @@
+﻿@using PersonRegistry.ViewModels
+@model IEnumerable<PetViewModel>
+
+@{
+    ViewBag.Title = "Pet Registry";
+}
+
+<h2>Pet Registry</h2>
+
+<p>@Html.ActionLink("Create New", "Create")</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Street)</th>
+        <th>@Html.DisplayNameFor(model => model.City)</th>
+    </tr>
+    @foreach (PetViewModel pet in Model)
+    {
+        <tr>
+            <td>@pet.Name</td>
+            <td>@pet.Street</td>
+            <td>@pet.City</td>
+        </tr>
+    }
+</table>
