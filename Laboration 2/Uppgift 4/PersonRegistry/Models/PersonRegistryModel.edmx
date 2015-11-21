@@ -48,7 +48,7 @@
           <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AddressId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="PersonRepositoryContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PersonRegistryContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Persons" EntityType="Self.Person" />
         </EntityContainer>
@@ -57,7 +57,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PersonRegistryModelStoreContainer" CdmEntityContainer="PersonRepositoryContext">
+        <EntityContainerMapping StorageEntityContainer="PersonRegistryModelStoreContainer" CdmEntityContainer="PersonRegistryContext">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="PersonRegistryModel.Address">
               <MappingFragment StoreEntitySet="Address">

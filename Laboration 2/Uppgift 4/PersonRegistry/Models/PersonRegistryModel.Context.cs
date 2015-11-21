@@ -13,10 +13,10 @@ namespace PersonRegistry.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PersonRepositoryContext : DbContext
+    public partial class PersonRegistryContext : DbContext
     {
-        public PersonRepositoryContext()
-            : base("name=PersonRepositoryContext")
+        public PersonRegistryContext()
+            : base("name=PersonRegistryContext")
         {
         }
     

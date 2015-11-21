@@ -8,11 +8,11 @@ namespace PersonRegistry.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly PersonRepositoryContext context;
+        private readonly PersonRegistryContext context;
 
         public HomeController()
         {
-            context = new PersonRepositoryContext();
+            context = new PersonRegistryContext();
         }
 
         // GET: Home
