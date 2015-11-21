@@ -8,11 +8,11 @@ using PersonRegistry.ViewModels;
 
 namespace PersonRegistry.Controllers
 {
-    public class HomeController : Controller
+    public class SqlTransactionController : Controller
     {
         private readonly PersonRegistryContext context;
 
-        public HomeController()
+        public SqlTransactionController()
         {
             context = new PersonRegistryContext();
         }
