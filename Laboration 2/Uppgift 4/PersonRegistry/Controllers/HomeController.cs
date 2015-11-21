@@ -23,6 +23,12 @@ namespace PersonRegistry.Controllers
             return View(personViewModels);
         }
 
+        // GET: Home/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         private IndexPersonViewModel CreateIndexPersonViewModel(Person person)
         {
             Address address = context.Addresses.Find(person.AddressId);
