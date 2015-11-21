@@ -14,9 +14,9 @@ namespace PersonRegistry.Models
     
     public partial class Person
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
-        public int AddressId { get; set; }
+        public System.Guid AddressId { get; set; }
     }
 }

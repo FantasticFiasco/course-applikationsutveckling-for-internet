@@ -12,6 +12,8 @@ namespace PersonRegistry.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class PersonRegistryContext : DbContext
     {
@@ -27,5 +29,34 @@ namespace PersonRegistry.Models
     
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
+    
+        public virtual int AddPersonWithAddress(Nullable<System.Guid> personId, string firstName, string surname, Nullable<System.Guid> addressId, string street, string city)
+        {
+            var personIdParameter = personId.HasValue ?
+                new ObjectParameter("personId", personId) :
+                new ObjectParameter("personId", typeof(System.Guid));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("firstName", firstName) :
+                new ObjectParameter("firstName", typeof(string));
+    
+            var surnameParameter = surname != null ?
+                new ObjectParameter("surname", surname) :
+                new ObjectParameter("surname", typeof(string));
+    
+            var addressIdParameter = addressId.HasValue ?
+                new ObjectParameter("addressId", addressId) :
+                new ObjectParameter("addressId", typeof(System.Guid));
+    
+            var streetParameter = street != null ?
+                new ObjectParameter("street", street) :
+                new ObjectParameter("street", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("city", city) :
+                new ObjectParameter("city", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddPersonWithAddress", personIdParameter, firstNameParameter, surnameParameter, addressIdParameter, streetParameter, cityParameter);
+        }
     }
 }

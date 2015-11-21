@@ -14,7 +14,7 @@ namespace PersonRegistry.Models
     
     public partial class Address
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
     }
