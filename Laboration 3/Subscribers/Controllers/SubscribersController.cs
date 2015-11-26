@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Subscribers.Dto;
 using Subscribers.Models;
 
 namespace Subscribers.Controllers
@@ -15,9 +16,9 @@ namespace Subscribers.Controllers
         }
 
         // GET: api/Subscribers
-        public IQueryable<Subscriber> GetSubscribers()
+        public IQueryable<SubscriberDto> GetSubscribers()
         {
-            return context.Subscribers;
+            return context.Subscribers.Select(ToDto).AsQueryable();
         }
 
         // GET: api/Subscribers/5
@@ -30,7 +31,7 @@ namespace Subscribers.Controllers
                 return NotFound();
             }
 
-            return Ok(subscriber);
+            return Ok(ToDto(subscriber));
         }
 
         protected override void Dispose(bool disposing)
@@ -40,6 +41,23 @@ namespace Subscribers.Controllers
                 context.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private static SubscriberDto ToDto(Subscriber subscriber)
+        {
+            return new SubscriberDto
+            {
+                SubscriptionNumber = subscriber.SubscriptionNumber,
+                SocialSecurityNumber = subscriber.SocialSecurityNumber,
+                FirstName = subscriber.FirstName,
+                Surname = subscriber.Surname,
+                Address = new AddressDto
+                {
+                    Street = subscriber.Street,
+                    PostalCode = subscriber.PostalCode,
+                    City = subscriber.City
+                }
+            };
         }
     }
 }
