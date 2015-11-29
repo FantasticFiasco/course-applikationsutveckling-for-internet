@@ -26,7 +26,9 @@ namespace Subscribers.Models
         public string Surname { get; set; }
 
         [Column("pr_telefonnummer")]
-        [Required]
+        // - May start with country code, i.e. '+'
+        // - May contain numbers, hyphen and space
+        [RegularExpression(@"^(\+)?[\d- ]+$")]
         public string PhoneNumber { get; set; }
 
         [Column("pr_gata")]
