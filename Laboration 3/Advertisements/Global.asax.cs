@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
 using System.Web.Routing;
+using Advertisements.Models;
 
 namespace Advertisements
 {
@@ -7,6 +9,7 @@ namespace Advertisements
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new AdvertisementContextInitializer());
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
