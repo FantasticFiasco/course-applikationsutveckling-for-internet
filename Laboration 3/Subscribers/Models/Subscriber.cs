@@ -6,33 +6,37 @@ namespace Subscribers.Models
     [Table("tbl_prenumeranter")]
     public class Subscriber
     {
-        [Column("prenumerant_id")]
+        [Column("pr_id")]
         public int Id { get; set; }
 
-        [Column("prenumerant_prenumerationsnummer")]
+        [Column("pr_prenumerationsnummer")]
         [Required]
         public string SubscriptionNumber { get; set; }
 
-        [Column("prenumerant_personnummer")]
+        [Column("pr_personnummer")]
         [Required]
         public string SocialSecurityNumber { get; set; }
 
-        [Column("prenumerant_fornamn")]
+        [Column("pr_fornamn")]
         [Required]
         public string FirstName { get; set; }
 
-        [Column("prenumerant_efternamn")]
+        [Column("pr_efternamn")]
         [Required]
         public string Surname { get; set; }
 
-        [Column("prenumerant_gata")]
+        [Column("pr_telefonnummer")]
+        [Required]
+        public string PhoneNumber { get; set; }
+
+        [Column("pr_gata")]
         [Required]
         public string Street { get; set; }
 
-        [Column("prenumerant_postnummer")]
+        [Column("pr_postnummer")]
         public int PostalCode { get; set; }
 
-        [Column("prenumerant_stad")]
+        [Column("pr_stad")]
         [Required]
         public string City { get; set; }
     }
