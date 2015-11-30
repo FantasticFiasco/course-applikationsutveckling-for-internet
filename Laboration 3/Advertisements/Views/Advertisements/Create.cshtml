@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Advertisements.ViewModels
+@model CreateAdvertisementViewModel
+
+@{
     ViewBag.Title = "Create Advertisement";
 }
 
@@ -6,7 +9,7 @@
 
 <h2>Create Advertisement</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("GetSubscriber", "Advertisements"))
 {
     <div class="form-group">
         <div id="subscriberradio" class="radio">
@@ -15,11 +18,11 @@
             </label>
         </div>
         <div>
-            <input type="text" id="subscriptionnumbertext" class="form-control" placeholder="Subscription number" />
-            <input type="submit" id="subscriptionnumberbutton" class="btn btn-default" value="Get" />
+            @Html.TextBoxFor(model => model.SubscriptionNumber, new { @class = "form-control", id="subscriptionnumbertext", placeholder = "Subscription number" })
+            <input type="submit" id="subscriptionnumberbutton" class="btn btn-default" value="Get"/>
         </div>
     </div>
-
+    
     <div id="companyradio" class="radio">
         <label>
             <input type="radio" name="advertisertype"> Company

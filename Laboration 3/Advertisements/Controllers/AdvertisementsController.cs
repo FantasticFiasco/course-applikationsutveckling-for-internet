@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Advertisements.ViewModels;
 
 namespace Advertisements.Controllers
 {
@@ -14,6 +16,13 @@ namespace Advertisements.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        // POST: Advertisements/GetSubscriber
+        [HttpPost]
+        public ActionResult GetSubscriber(CreateAdvertisementViewModel viewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }
