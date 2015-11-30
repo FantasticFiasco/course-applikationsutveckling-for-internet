@@ -12,7 +12,7 @@ namespace Advertisements
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Advertisements", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

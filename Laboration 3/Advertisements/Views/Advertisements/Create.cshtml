@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Create Advertisement";
+}
+
+<script src="~/Scripts/AdvertisementsScripts.js"></script>
+
+<h2>Create Advertisement</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div id="subscriberradio" class="radio">
+            <label>
+                <input type="radio" name="advertisertype" checked> Subscriber
+            </label>
+        </div>
+        <div>
+            <input type="text" id="subscriptionnumbertext" class="form-control" placeholder="Subscription number" />
+            <input type="submit" id="subscriptionnumberbutton" class="btn btn-default" value="Get" />
+        </div>
+    </div>
+
+    <div id="companyradio" class="radio">
+        <label>
+            <input type="radio" name="advertisertype"> Company
+        </label>
+    </div>
+}
