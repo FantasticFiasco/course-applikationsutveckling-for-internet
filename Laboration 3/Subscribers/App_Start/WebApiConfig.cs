@@ -14,7 +14,7 @@ namespace Subscribers
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{subscriptionNumber}",
                 defaults: new { id = RouteParameter.Optional }
             );
 

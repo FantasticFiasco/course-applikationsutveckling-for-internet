@@ -22,10 +22,10 @@ namespace Subscribers.Controllers
         }
 
         // GET: api/Subscribers/5
-        [ResponseType(typeof(Subscriber))]
-        public IHttpActionResult GetSubscriber(int id)
+        [ResponseType(typeof(SubscriberDto))]
+        public IHttpActionResult GetSubscriber(string subscriptionNumber)
         {
-            Subscriber subscriber = context.Subscribers.Find(id);
+            Subscriber subscriber = context.Subscribers.SingleOrDefault(s => s.SubscriptionNumber == subscriptionNumber);
             if (subscriber == null)
             {
                 return NotFound();

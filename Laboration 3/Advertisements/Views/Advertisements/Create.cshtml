@@ -1,31 +1,36 @@
 ﻿@using Advertisements.ViewModels
 @model CreateAdvertisementViewModel
 
+<script src="~/Scripts/advertisements.js"></script>
+<script src="~/Scripts/validation.js"></script>
+
 @{
     ViewBag.Title = "Create Advertisement";
 }
 
-<script src="~/Scripts/AdvertisementsScripts.js"></script>
-
 <h2>Create Advertisement</h2>
 
-@using (Html.BeginForm("GetSubscriber", "Advertisements"))
+@using (Html.BeginForm("GetSubscriber", "Advertisements", FormMethod.Post, new { @class = "form-horizontal" }))
 {
+    @Html.ValidationSummary(false)
+
     <div class="form-group">
         <div id="subscriberradio" class="radio">
-            <label>
+            <label class="control-label col-sm-2" for="subscriptionnumbertext">
                 <input type="radio" name="advertisertype" checked> Subscriber
             </label>
-        </div>
-        <div>
-            @Html.TextBoxFor(model => model.SubscriptionNumber, new { @class = "form-control", id="subscriptionnumbertext", placeholder = "Subscription number" })
-            <input type="submit" id="subscriptionnumberbutton" class="btn btn-default" value="Get"/>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.SubscriptionNumber, new { @class = "form-control", id = "subscriptionnumbertext", placeholder = "Subscription number" })
+                <input type="submit" id="subscriptionnumberbutton" class="btn btn-default" value="Get" />
+            </div>
         </div>
     </div>
-    
-    <div id="companyradio" class="radio">
-        <label>
-            <input type="radio" name="advertisertype"> Company
-        </label>
+
+    <div class="form-group">
+        <div id="companyradio" class="radio">
+            <label class="control-label col-sm-2" for="advertisertype">
+                <input type="radio" name="advertisertype"> Company
+            </label>
+        </div>
     </div>
 }

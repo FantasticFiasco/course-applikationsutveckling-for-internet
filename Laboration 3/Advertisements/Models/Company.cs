@@ -4,34 +4,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Advertisements.Models
 {
-    [Table("tbl_annonsorer")]
-    public class Advertiser
+    [Table("tbl_foretag")]
+    public class Company
     {
         private Collection<Advertisement> advertisements;
 
-        [Column("an_id")]
+        [Column("fo_id")]
         public int Id { get; set; }
 
-        [Column("an_namn")]
+        [Column("fo_namn")]
         [Required]
         public string Name { get; set; }
 
-        [Column("an_telefonnummer")]
+        [Column("fo_organisationsnummer")]
+        public string OrganisationNumber { get; set; }
+
+        [Column("fo_telefonnummer")]
         // - May start with country code, i.e. '+'
         // - May contain numbers, hyphen and space
         [RegularExpression(@"^(\+)?[\d- ]+$")]
         public string PhoneNumber { get; set; }
-
-        [Column("an_gata")]
-        [Required]
-        public string Street { get; set; }
-
-        [Column("an_postnummer")]
-        public int PostalCode { get; set; }
-
-        [Column("an_stad")]
-        [Required]
-        public string City { get; set; }
 
         public virtual Collection<Advertisement> Advertisements
         {
@@ -39,25 +31,32 @@ namespace Advertisements.Models
             set { advertisements = value; }
         }
 
-        #region Subscriber Members
+        #region Address 
 
-        [Column("an_prenumerationsnummer")]
-        public string SubscriptionNumber { get; set; }
+        [Column("fo_gata")]
+        [Required]
+        public string Street { get; set; }
+
+        [Column("fo_postnummer")]
+        public int PostalCode { get; set; }
+
+        [Column("fo_stad")]
+        [Required]
+        public string City { get; set; }
 
         #endregion
 
-        #region Company  Members
+        #region Invoice
 
-        [Column("an_organisationsnummer")]
-        public string OrganisationNumber { get; set; }
-
-        [Column("an_fakturagata")]
+        [Column("fo_fakturagata")]
+        [Required]
         public string InvoiceStreet { get; set; }
 
-        [Column("an_fakturapostnummer")]
+        [Column("fo_fakturapostnummer")]
         public int InvoicePostalCode { get; set; }
 
-        [Column("an_fakturastad")]
+        [Column("fo_fakturastad")]
+        [Required]
         public string InvoiceCity { get; set; }
 
         #endregion
