@@ -42,5 +42,19 @@ namespace Advertisements.ViewModels
         public string InvoiceCity { get; set; }
 
         #endregion
+
+        #region Advertisment
+
+        [Display(Name = "Advertisement Title")]
+        public string AdvertisementTitle { get; set; }
+
+        [Display(Name = "Advertisement Content")]
+        [DataType(DataType.MultilineText)]
+        public string AdvertisementContent { get; set; }
+
+        [Display(Name = "Advertisement Price")]
+        public double AdvertisementPrice { get; set; }
+
+        #endregion
     }
 }
