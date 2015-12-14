@@ -1,11 +1,12 @@
-﻿namespace Advertisements.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Advertisements.ViewModels
 {
     public class CreateAdvertisementViewModel
     {
-        public string Name { get; set; }
-
         public string Street { get; set; }
 
+        [Display(Name = "Postal Code")]
         public int PostalCode { get; set; }
 
         public string City { get; set; }
@@ -14,11 +15,19 @@
 
         public string SubscriptionNumber { get; set; }
 
-        public string SocialSecurityNumber { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        public string Surname { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
 
         #endregion
 
         #region Company  Members
+
+        public string Name { get; set; }
 
         public string OrganisationNumber { get; set; }
 

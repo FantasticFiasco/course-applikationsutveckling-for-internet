@@ -51,6 +51,7 @@ namespace Subscribers.Controllers
                 SocialSecurityNumber = subscriber.SocialSecurityNumber,
                 FirstName = subscriber.FirstName,
                 Surname = subscriber.Surname,
+                PhoneNumber = subscriber.PhoneNumber,
                 Address = new AddressDto
                 {
                     Street = subscriber.Street,

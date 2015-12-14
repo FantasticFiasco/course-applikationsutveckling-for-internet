@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Advertisements.ViewModels;
@@ -51,13 +52,28 @@ namespace Advertisements.Controllers
             }
         }
 
+        // POST: Advertisements/AddSubscriberAdvertisement
+        [HttpPost]
+        public async Task<ActionResult> AddSubscriberAdvertisement(CreateAdvertisementViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        // POST: Advertisements/AddCompanyAdvertisement
+        [HttpPost]
+        public async Task<ActionResult> AddCompanyAdvertisement(CreateAdvertisementViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
         private static CreateAdvertisementViewModel FromDto(SubscriberDto subscriber)
         {
             return new CreateAdvertisementViewModel
             {
                 SubscriptionNumber = subscriber.SubscriptionNumber,
-                SocialSecurityNumber = subscriber.SocialSecurityNumber,
-                Name = string.Format("{0} {1}", subscriber.FirstName, subscriber.Surname),
+                FirstName = subscriber.FirstName,
+                Surname = subscriber.Surname,
+                PhoneNumber = subscriber.PhoneNumber,
                 Street = subscriber.Address.Street,
                 PostalCode = subscriber.Address.PostalCode,
                 City = subscriber.Address.City

@@ -16,10 +16,6 @@ namespace Advertisements.Models
         [Required]
         public string SubscriptionNumber { get; set; }
 
-        [Column("an_personnummer")]
-        [Required]
-        public string SocialSecurityNumber { get; set; }
-
         [Column("an_fornamn")]
         [Required]
         public string FirstName { get; set; }
