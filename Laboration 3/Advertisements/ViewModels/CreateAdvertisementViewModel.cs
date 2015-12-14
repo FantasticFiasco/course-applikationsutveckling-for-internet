@@ -29,12 +29,16 @@ namespace Advertisements.ViewModels
 
         public string Name { get; set; }
 
+        [Display(Name = "Organisation Number")]
         public string OrganisationNumber { get; set; }
 
+        [Display(Name = "Invoice Street")]
         public string InvoiceStreet { get; set; }
 
+        [Display(Name = "Invoice Postal Code")]
         public int InvoicePostalCode { get; set; }
 
+        [Display(Name = "Invoice City")]
         public string InvoiceCity { get; set; }
 
         #endregion
