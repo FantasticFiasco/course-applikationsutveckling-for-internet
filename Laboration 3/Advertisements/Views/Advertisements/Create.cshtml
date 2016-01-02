@@ -37,6 +37,8 @@
 
 @using (Html.BeginForm("AddSubscriberAdvertisement", "Advertisements", FormMethod.Post, new { @class = "form-horizontal", id = "subscriberinput" }))
 {
+    @Html.HiddenFor(model => model.SubscriptionNumber)
+    
     <div class="form-group">
         @Html.LabelFor(model => model.FirstName, new { @class = "col-sm-2 control-label" })
         <div class="col-md-10">
@@ -101,9 +103,9 @@
 @using (Html.BeginForm("AddCompanyAdvertisement", "Advertisements", FormMethod.Post, new { @class = "form-horizontal", id = "companyinput" }))
 {
     <div class="form-group">
-        @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 control-label"})
+        @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" }})
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
     <div class="form-group">

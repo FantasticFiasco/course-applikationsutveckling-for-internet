@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Advertisements.Models;
 using Advertisements.ViewModels;
 using Advertisements.WebServices;
 using Advertisements.WebServices.Requests;
@@ -11,10 +13,12 @@ namespace Advertisements.Controllers
 {
     public class AdvertisementsController : AsyncController
     {
+        private readonly AdvertisementContext context;
         private readonly SubscriberService subscriberService;
 
         public AdvertisementsController()
         {
+            context = new AdvertisementContext();
             subscriberService = new SubscriberService();
         }
 
@@ -56,7 +60,22 @@ namespace Advertisements.Controllers
         [HttpPost]
         public async Task<ActionResult> AddSubscriberAdvertisement(CreateAdvertisementViewModel viewModel)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                Subscriber subscriber = await context.Subscribers.SingleOrDefaultAsync(s => s.SubscriptionNumber == viewModel.SubscriptionNumber);
+                if (subscriber == null)
+                {
+                    subscriber = CreateSubscriber(viewModel);
+                    context.Subscribers.Add(subscriber);
+                }
+
+                Advertisement advertisement = CreateAdvertisement(viewModel);
+                subscriber.Advertisements.Add(advertisement);
+
+                await context.SaveChangesAsync();
+            }
+
+            return View("Create", viewModel);
         }
 
         // POST: Advertisements/AddCompanyAdvertisement
@@ -77,6 +96,31 @@ namespace Advertisements.Controllers
                 Street = subscriber.Address.Street,
                 PostalCode = subscriber.Address.PostalCode,
                 City = subscriber.Address.City
+            };
+        }
+
+        private static Subscriber CreateSubscriber(CreateAdvertisementViewModel viewModel)
+        {
+            return new Subscriber
+            {
+                SubscriptionNumber = viewModel.SubscriptionNumber,
+                FirstName = viewModel.FirstName,
+                Surname = viewModel.Surname,
+                PhoneNumber = viewModel.PhoneNumber,
+                Street = viewModel.Street,
+                PostalCode = viewModel.PostalCode.Value,
+                City = viewModel.City
+            };
+        }
+
+        private static Advertisement CreateAdvertisement(CreateAdvertisementViewModel viewModel)
+        {
+            return new Advertisement
+            {
+                Title = viewModel.AdvertisementTitle,
+                Content = viewModel.AdvertisementContent,
+                Price = viewModel.AdvertisementPrice.Value,
+                AdvertisementCost = viewModel.SubscriptionNumber != null ? 0 : 40
             };
         }
 
