@@ -58,6 +58,16 @@ namespace Advertisements.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Advertisements/Details/5
+        public ActionResult Details(int id)
+        {
+            Advertisement advertisement = context.Advertisements.Find(id);
+            if (advertisement == null)
+                return HttpNotFound();
+
+            return View(CreateAdvertisementViewModel(advertisement));
+        }
+
         // POST: Advertisements/GetSubscriber
         [HttpPost]
         public async Task<ActionResult> GetSubscriber(CreateAdvertisementViewModel viewModel)
@@ -97,6 +107,7 @@ namespace Advertisements.Controllers
                 subscriber.Advertisements.Add(advertisement);
 
                 await context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
 
             return View("Create", viewModel);
@@ -145,6 +156,17 @@ namespace Advertisements.Controllers
                 Content = viewModel.AdvertisementContent,
                 Price = viewModel.AdvertisementPrice.Value,
                 AdvertisementCost = viewModel.SubscriptionNumber != null ? 0 : 40
+            };
+        }
+
+        private static AdvertisementViewModel CreateAdvertisementViewModel(Advertisement advertisement)
+        {
+            return new AdvertisementViewModel
+            {
+                Id = advertisement.Id,
+                Title = advertisement.Title,
+                Content = advertisement.Content,
+                Price = advertisement.Price
             };
         }
 
