@@ -45,6 +45,19 @@ namespace Advertisements.Controllers
             return View();
         }
 
+        // GET: Advertisements/Delete/5
+        public ActionResult Delete(int id)
+        {
+            Advertisement advertisement = context.Advertisements.Find(id);
+            if (advertisement == null)
+                return HttpNotFound();
+
+            context.Advertisements.Remove(advertisement);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         // POST: Advertisements/GetSubscriber
         [HttpPost]
         public async Task<ActionResult> GetSubscriber(CreateAdvertisementViewModel viewModel)
