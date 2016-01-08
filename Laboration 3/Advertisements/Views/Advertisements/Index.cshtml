@@ -1,7 +1,29 @@
-﻿@{
+﻿@using Advertisements.ViewModels;
+@model IEnumerable<AdvertisementViewModel>
+
+@{
     ViewBag.Title = "Advertisements";
 }
 
 <h2>Advertisements</h2>
 
 <p>@Html.ActionLink("Create New", "Create")</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Price)</th>
+        <th />
+    </tr>
+    @foreach (AdvertisementViewModel advertisement in Model)
+    {
+        <tr>
+            <td>@advertisement.Title</td>
+            <td>@advertisement.Price</td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = advertisement.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = advertisement.Id })
+            </td>
+        </tr>
+    }
+</table>

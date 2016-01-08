@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -25,7 +27,16 @@ namespace Advertisements.Controllers
         // GET: Advertisements
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<AdvertisementViewModel> advertisements = context.Advertisements
+                .Select(advertisement => new AdvertisementViewModel
+                {
+                    Id = advertisement.Id,
+                    Title = advertisement.Title,
+                    Content = advertisement.Content,
+                    Price = advertisement.Price
+                });
+            
+            return View(advertisements);
         }
 
         // GET: Advertisements/Create
