@@ -75,55 +75,55 @@ namespace Advertisements.ViewModels
         private IEnumerable<ValidationResult> ValidateAddress()
         {
             if (string.IsNullOrWhiteSpace(Street))
-                yield return new ValidationResult("The Street field is required.", new[] { "Street" });
+                yield return new ValidationResult("Enter a street", new[] { "Street" });
 
             if (PostalCode == null)
-                yield return new ValidationResult("The Postal Code field is required.", new[] { "PostalCode" });
+                yield return new ValidationResult("Enter a postal code", new[] { "PostalCode" });
 
             if (string.IsNullOrWhiteSpace(City))
-                yield return new ValidationResult("The City field is required.", new[] { "City" });
+                yield return new ValidationResult("Enter a city", new[] { "City" });
         }
 
         private IEnumerable<ValidationResult> ValidateAdvertisment()
         {
             if (string.IsNullOrWhiteSpace(AdvertisementTitle))
-                yield return new ValidationResult("The Advertisement Title field is required.", new[] { "AdvertisementTitle" });
+                yield return new ValidationResult("Enter a advertisement title", new[] { "AdvertisementTitle" });
 
             if (string.IsNullOrWhiteSpace(AdvertisementContent))
-                yield return new ValidationResult("The Advertisement Content field is required.", new[] { "AdvertisementContent" });
+                yield return new ValidationResult("Enter a advertisement content", new[] { "AdvertisementContent" });
 
             if (AdvertisementPrice == null)
-                yield return new ValidationResult("The Advertisement Price field is required.", new[] { "AdvertisementPrice" });
+                yield return new ValidationResult("Enter a advertisement price", new[] { "AdvertisementPrice" });
         }
 
         private IEnumerable<ValidationResult> ValidateSubscriberAdvertisement()
         {
             if (string.IsNullOrWhiteSpace(FirstName))
-                yield return new ValidationResult("The First Name field is required.", new[] { "FirstName" });
+                yield return new ValidationResult("Enter a first name", new[] { "FirstName" });
 
             if (string.IsNullOrWhiteSpace(Surname))
-                yield return new ValidationResult("The Surname field is required.", new[] { "Surname" });
+                yield return new ValidationResult("Enter a surname", new[] { "Surname" });
 
             if (string.IsNullOrWhiteSpace(PhoneNumber))
-                yield return new ValidationResult("The Phone Number field is required.", new[] { "PhoneNumber" });
+                yield return new ValidationResult("Enter a phone number", new[] { "PhoneNumber" });
         }
 
         private IEnumerable<ValidationResult> ValidateCompanyAdvertisement()
         {
             if (string.IsNullOrWhiteSpace(Name))
-                yield return new ValidationResult("The Name field is required.", new[] { "Name" });
+                yield return new ValidationResult("Enter a name", new[] { "Name" });
 
             if (string.IsNullOrWhiteSpace(OrganizationNumber))
-                yield return new ValidationResult("The Organization Number field is required.", new[] { "OrganizationNumber" });
+                yield return new ValidationResult("Enter a organization number", new[] { "OrganizationNumber" });
 
             if (string.IsNullOrWhiteSpace(InvoiceStreet))
-                yield return new ValidationResult("The Invoice Street field is required.", new[] { "InvoiceStreet" });
+                yield return new ValidationResult("Enter a invoice street", new[] { "InvoiceStreet" });
 
             if (InvoicePostalCode == null)
-                yield return new ValidationResult("The Invoice Postal Code field is required.", new[] { "InvoicePostalCode" });
+                yield return new ValidationResult("Enter a invoice postal code", new[] { "InvoicePostalCode" });
 
             if (string.IsNullOrWhiteSpace(InvoiceCity))
-                yield return new ValidationResult("The Invoice City field is required.", new[] { "InvoiceCity" });
+                yield return new ValidationResult("Enter a invoice city", new[] { "InvoiceCity" });
         }
 
         #endregion
