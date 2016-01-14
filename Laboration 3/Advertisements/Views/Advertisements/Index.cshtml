@@ -13,6 +13,7 @@
     <tr>
         <th>@Html.DisplayNameFor(model => model.Title)</th>
         <th>@Html.DisplayNameFor(model => model.Price)</th>
+        <th>@Html.DisplayNameFor(model => model.Reseller)</th>
         <th />
     </tr>
     @foreach (AdvertisementViewModel advertisement in Model)
@@ -20,6 +21,7 @@
         <tr>
             <td>@advertisement.Title</td>
             <td>@advertisement.Price</td>
+            <td>@advertisement.Reseller</td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = advertisement.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = advertisement.Id })

@@ -17,6 +17,9 @@ namespace Advertisements.Models
         [Column("ad_innehall")]
         public string Content { get; set; }
 
+        [Column("ad_aterforsaljare")]
+        public string Reseller { get; set; }
+
         [Column("ad_pris")]
         public int Price { get; set; }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -33,7 +32,8 @@ namespace Advertisements.Controllers
                     Id = advertisement.Id,
                     Title = advertisement.Title,
                     Content = advertisement.Content,
-                    Price = advertisement.Price
+                    Price = advertisement.Price,
+                    Reseller = advertisement.Reseller
                 });
             
             return View(advertisements);
@@ -117,7 +117,23 @@ namespace Advertisements.Controllers
         [HttpPost]
         public async Task<ActionResult> AddCompanyAdvertisement(CreateAdvertisementViewModel viewModel)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                Company company = await context.Companies.SingleOrDefaultAsync(c => c.OrganisationNumber == viewModel.OrganisationNumber);
+                if (company == null)
+                {
+                    company = CreateCompany(viewModel);
+                    context.Companies.Add(company);
+                }
+
+                Advertisement advertisement = CreateAdvertisement(viewModel);
+                company.Advertisements.Add(advertisement);
+
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View("Create", viewModel);
         }
 
         private static CreateAdvertisementViewModel FromDto(SubscriberDto subscriber)
@@ -148,14 +164,33 @@ namespace Advertisements.Controllers
             };
         }
 
+        private static Company CreateCompany(CreateAdvertisementViewModel viewModel)
+        {
+            return new Company
+            {
+                Name = viewModel.Name,
+                OrganisationNumber = viewModel.OrganisationNumber,
+                PhoneNumber = viewModel.PhoneNumber,
+                Street = viewModel.Street,
+                PostalCode = viewModel.PostalCode.Value,
+                City = viewModel.City,
+                InvoiceStreet = viewModel.InvoiceStreet,
+                InvoicePostalCode = viewModel.InvoicePostalCode.Value,
+                InvoiceCity = viewModel.InvoiceCity
+            };
+        }
+
         private static Advertisement CreateAdvertisement(CreateAdvertisementViewModel viewModel)
         {
+            bool isSubscriber = viewModel.SubscriptionNumber != null;
+
             return new Advertisement
             {
                 Title = viewModel.AdvertisementTitle,
                 Content = viewModel.AdvertisementContent,
                 Price = viewModel.AdvertisementPrice.Value,
-                AdvertisementCost = viewModel.SubscriptionNumber != null ? 0 : 40
+                AdvertisementCost = isSubscriber ? 0 : 40,
+                Reseller = isSubscriber ? string.Format("{0} {1}", viewModel.FirstName, viewModel.Surname) : string.Format("Company: {0}", viewModel.Name)
             };
         }
 
