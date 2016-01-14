@@ -42,7 +42,12 @@ namespace Advertisements.Controllers
         // GET: Advertisements/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new CreateAdvertisementViewModel
+            {
+                IsSubscriberSelected = true
+            };
+
+            return View(viewModel);
         }
 
         // GET: Advertisements/Delete/5
@@ -94,6 +99,8 @@ namespace Advertisements.Controllers
         [HttpPost]
         public async Task<ActionResult> AddSubscriberAdvertisement(CreateAdvertisementViewModel viewModel)
         {
+            viewModel.IsSubscriberSelected = true;
+
             if (ModelState.IsValid)
             {
                 Subscriber subscriber = await context.Subscribers.SingleOrDefaultAsync(s => s.SubscriptionNumber == viewModel.SubscriptionNumber);
@@ -117,6 +124,8 @@ namespace Advertisements.Controllers
         [HttpPost]
         public async Task<ActionResult> AddCompanyAdvertisement(CreateAdvertisementViewModel viewModel)
         {
+            viewModel.IsSubscriberSelected = false;
+
             if (ModelState.IsValid)
             {
                 Company company = await context.Companies.SingleOrDefaultAsync(c => c.OrganisationNumber == viewModel.OrganizationNumber);

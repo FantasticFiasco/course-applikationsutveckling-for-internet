@@ -6,6 +6,8 @@ namespace Advertisements.ViewModels
 {
     public class CreateAdvertisementViewModel : IValidatableObject
     {
+        public bool IsSubscriberSelected { get; set; }
+
         public string Street { get; set; }
 
         [Display(Name = "Postal Code")]
@@ -63,7 +65,7 @@ namespace Advertisements.ViewModels
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            IEnumerable<ValidationResult> validationResults = SubscriptionNumber != null ?
+            IEnumerable<ValidationResult> validationResults = IsSubscriberSelected ?
                 ValidateSubscriberAdvertisement() :
                 ValidateCompanyAdvertisement();
 

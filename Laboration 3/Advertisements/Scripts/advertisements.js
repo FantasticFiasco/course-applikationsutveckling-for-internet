@@ -1,8 +1,5 @@
 ﻿$(document).ready(function () {
 
-    // Company input should be disabled when document is loaded
-    $("#companyinput").hide();
-
     // Enable subscriber controls when radio button is selected
     $("#subscriberradio").change(function() {
         $("#subscriptionnumbertext").prop("disabled", false);
