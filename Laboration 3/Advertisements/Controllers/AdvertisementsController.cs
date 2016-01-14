@@ -119,7 +119,7 @@ namespace Advertisements.Controllers
         {
             if (ModelState.IsValid)
             {
-                Company company = await context.Companies.SingleOrDefaultAsync(c => c.OrganisationNumber == viewModel.OrganisationNumber);
+                Company company = await context.Companies.SingleOrDefaultAsync(c => c.OrganisationNumber == viewModel.OrganizationNumber);
                 if (company == null)
                 {
                     company = CreateCompany(viewModel);
@@ -169,7 +169,7 @@ namespace Advertisements.Controllers
             return new Company
             {
                 Name = viewModel.Name,
-                OrganisationNumber = viewModel.OrganisationNumber,
+                OrganisationNumber = viewModel.OrganizationNumber,
                 PhoneNumber = viewModel.PhoneNumber,
                 Street = viewModel.Street,
                 PostalCode = viewModel.PostalCode.Value,

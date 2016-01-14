@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Advertisements.ViewModels
 {
     public class CreateAdvertisementViewModel : IValidatableObject
     {
-        [Required]
         public string Street { get; set; }
 
-        [Required]
         [Display(Name = "Postal Code")]
         public int? PostalCode { get; set; }
 
-        [Required]
         public string City { get; set; }
 
         #region Subscriber Members
@@ -33,8 +31,8 @@ namespace Advertisements.ViewModels
 
         public string Name { get; set; }
 
-        [Display(Name = "Organisation Number")]
-        public string OrganisationNumber { get; set; }
+        [Display(Name = "Organization Number")]
+        public string OrganizationNumber { get; set; }
 
         [Display(Name = "Invoice Street")]
         public string InvoiceStreet { get; set; }
@@ -49,16 +47,13 @@ namespace Advertisements.ViewModels
 
         #region Advertisment
 
-        [Required]
         [Display(Name = "Advertisement Title")]
         public string AdvertisementTitle { get; set; }
 
-        [Required]
         [Display(Name = "Advertisement Content")]
         [DataType(DataType.MultilineText)]
         public string AdvertisementContent { get; set; }
 
-        [Required]
         [Display(Name = "Advertisement Price")]
         public int? AdvertisementPrice { get; set; }
 
@@ -68,9 +63,37 @@ namespace Advertisements.ViewModels
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return SubscriptionNumber != null ?
+            IEnumerable<ValidationResult> validationResults = SubscriptionNumber != null ?
                 ValidateSubscriberAdvertisement() :
                 ValidateCompanyAdvertisement();
+
+            return validationResults
+                .Concat(ValidateAddress())
+                .Concat(ValidateAdvertisment());
+        }
+
+        private IEnumerable<ValidationResult> ValidateAddress()
+        {
+            if (string.IsNullOrWhiteSpace(Street))
+                yield return new ValidationResult("The Street field is required.", new[] { "Street" });
+
+            if (PostalCode == null)
+                yield return new ValidationResult("The Postal Code field is required.", new[] { "PostalCode" });
+
+            if (string.IsNullOrWhiteSpace(City))
+                yield return new ValidationResult("The City field is required.", new[] { "City" });
+        }
+
+        private IEnumerable<ValidationResult> ValidateAdvertisment()
+        {
+            if (string.IsNullOrWhiteSpace(AdvertisementTitle))
+                yield return new ValidationResult("The Advertisement Title field is required.", new[] { "AdvertisementTitle" });
+
+            if (string.IsNullOrWhiteSpace(AdvertisementContent))
+                yield return new ValidationResult("The Advertisement Content field is required.", new[] { "AdvertisementContent" });
+
+            if (AdvertisementPrice == null)
+                yield return new ValidationResult("The Advertisement Price field is required.", new[] { "AdvertisementPrice" });
         }
 
         private IEnumerable<ValidationResult> ValidateSubscriberAdvertisement()
@@ -90,8 +113,8 @@ namespace Advertisements.ViewModels
             if (string.IsNullOrWhiteSpace(Name))
                 yield return new ValidationResult("The Name field is required.", new[] { "Name" });
 
-            if (string.IsNullOrWhiteSpace(OrganisationNumber))
-                yield return new ValidationResult("The Organisation Number field is required.", new[] { "OrganisationNumber" });
+            if (string.IsNullOrWhiteSpace(OrganizationNumber))
+                yield return new ValidationResult("The Organization Number field is required.", new[] { "OrganizationNumber" });
 
             if (string.IsNullOrWhiteSpace(InvoiceStreet))
                 yield return new ValidationResult("The Invoice Street field is required.", new[] { "InvoiceStreet" });
