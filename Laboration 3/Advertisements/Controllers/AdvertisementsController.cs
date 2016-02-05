@@ -77,6 +77,8 @@ namespace Advertisements.Controllers
         [HttpPost]
         public async Task<ActionResult> GetSubscriber(CreateAdvertisementViewModel viewModel)
         {
+            ModelState.Clear();
+
             if (string.IsNullOrWhiteSpace(viewModel.SubscriptionNumber))
             {
                 ModelState.AddModelError("SubscriptionNumber", "Enter a subscription number");
@@ -149,6 +151,7 @@ namespace Advertisements.Controllers
         {
             return new CreateAdvertisementViewModel
             {
+                IsSubscriberSelected = true,
                 SubscriptionNumber = subscriber.SubscriptionNumber,
                 FirstName = subscriber.FirstName,
                 Surname = subscriber.Surname,
