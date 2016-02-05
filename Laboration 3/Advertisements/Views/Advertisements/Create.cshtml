@@ -114,8 +114,6 @@
 
 @using (Html.BeginForm("AddCompanyAdvertisement", "Advertisements", FormMethod.Post, new { @class = "form-horizontal", id = "companyinput" }))
 {
-    @Html.HiddenFor(model => model.IsSubscriberSelected)
-
     <div class="form-group">
         @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 control-label" })
         <div class="col-md-10">
