@@ -3,7 +3,9 @@
 }
 
 @section scripts {
-    <script src="~/Scripts/test.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/app/services/blog-service.js"></script>
+    <script src="~/Scripts/app/controllers/blog-controller.js"></script>
 }
 
 <div class="jumbotron">
@@ -12,10 +14,14 @@
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row" ng-app="TestApp">
-    <div class="col-md-4" ng-controller="TestController">
+<div class="row" ng-app="BlogApp">
+    <div class="col-md-4" ng-controller="BlogController">
         <h2>Getting started</h2>
-        <p>{{message}}</p>
+
+        <div ng-repeat="entry in blogEntries">
+            <p>{{entry}}</p>
+        </div>
+
         <p>
             ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
             enables a clean separation of concerns and gives you full control over markup

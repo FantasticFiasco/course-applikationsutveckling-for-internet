@@ -11,7 +11,7 @@ namespace Blog
         public void Configuration(IAppBuilder app)
         {
             // Configure the db context
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(() => new ApplicationDbContext());
         }
     }
 }

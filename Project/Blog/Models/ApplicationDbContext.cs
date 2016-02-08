@@ -10,10 +10,5 @@ namespace Blog.Models
         }
 
         public virtual IDbSet<Entry> Entries { get; set; }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
     }
 }
