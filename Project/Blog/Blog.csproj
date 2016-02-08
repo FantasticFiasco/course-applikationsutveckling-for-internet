@@ -176,7 +176,7 @@
     </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationDbContextInitializer.cs" />
-    <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\BlogEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

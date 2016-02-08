@@ -9,6 +9,6 @@ namespace Blog.Models
         {
         }
 
-        public virtual IDbSet<Entry> Entries { get; set; }
+        public virtual IDbSet<BlogEntry> BlogEntries { get; set; }
     }
 }
