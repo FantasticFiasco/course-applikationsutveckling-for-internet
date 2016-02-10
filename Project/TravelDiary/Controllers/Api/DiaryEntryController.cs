@@ -6,22 +6,22 @@ using TravelDiary.Models;
 
 namespace TravelDiary.Controllers.Api
 {
-    public class DiaryEntriesController : ApiController
+    public class DiaryEntryController : ApiController
     {
         private readonly ApplicationDbContext context;
 
-        public DiaryEntriesController()
+        public DiaryEntryController()
         {
             context = new ApplicationDbContext();
         }
 
-        // GET api/diaryentries
-        public IQueryable<DiaryEntry> Get()
+        // GET api/diaryentry
+        public DiaryEntry Get()
         {
-            return context.DiaryEntries;
+            return context.DiaryEntries.OrderByDescending(entry => entry.Date).First();
         }
 
-        // GET api/diaryentries/5
+        // GET api/diaryentry/5
         public IHttpActionResult Get(int id)
         {
             DiaryEntry diaryEntry = context.DiaryEntries.Find(id);
@@ -33,19 +33,19 @@ namespace TravelDiary.Controllers.Api
             return Ok(diaryEntry);
         }
 
-        // POST api/diaryentries
+        // POST api/diaryentry
         public void Post([FromBody]string value)
         {
             throw new NotImplementedException();
         }
 
-        // PUT api/diaryentries/5
+        // PUT api/diaryentry/5
         public void Put(int id, [FromBody]string value)
         {
             throw new NotImplementedException();
         }
 
-        // DELETE api/diaryentries/5
+        // DELETE api/diaryentry/5
         public async Task<IHttpActionResult> Delete(int id)
         {
             DiaryEntry diaryEntry = context.DiaryEntries.Find(id);

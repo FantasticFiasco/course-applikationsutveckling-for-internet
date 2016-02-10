@@ -1,1 +1,1 @@
-﻿var app = angular.module("TravelDiaryApp", []);
+﻿var app = angular.module("TravelDiaryApp", ['ngSanitize']);
