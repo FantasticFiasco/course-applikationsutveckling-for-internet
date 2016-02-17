@@ -2,8 +2,7 @@
 
     diaryEntryService.getLatestEntry()
         .success(function(data) {
-            $scope.title = data.title;
-            $scope.content = data.content;
+            $scope.entry = data;
         });
     
 }]);
