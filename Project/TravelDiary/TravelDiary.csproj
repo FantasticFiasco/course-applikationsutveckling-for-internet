@@ -213,6 +213,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\directives\diary-entry-text.html" />
+    <Content Include="Scripts\app\directives\diary-entry-text.js" />
     <Content Include="Scripts\app\services\diary-entry-service.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
