@@ -1,2 +1,6 @@
 ﻿<h1>{{entry.title}} <small>{{entry.date | date}}</small></h1>
 <p ng-bind-html="entry.content"></p>
+<ul class="pager">
+    <li class="previous" ng-show="entry.previousId != null" ng-click="getEntry(entry.previousId)"><a href="#">Previous</a></li>
+    <li class="next" ng-show="entry.nextId != null" ng-click="getEntry(entry.nextId)"><a href="#">Next</a></li>
+</ul>

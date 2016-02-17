@@ -5,5 +5,9 @@
         return $http.get("api/diaryentry");
     };
 
+    instance.getEntry = function(id) {
+        return $http.get("api/diaryentry/" + id);
+    }
+
     return instance;
 }]);

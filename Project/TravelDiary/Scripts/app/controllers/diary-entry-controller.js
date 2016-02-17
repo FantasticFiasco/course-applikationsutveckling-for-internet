@@ -4,5 +4,12 @@
         .success(function(data) {
             $scope.entry = data;
         });
-    
+
+    $scope.getEntry = function(id) {
+        diaryEntryService.getEntry(id)
+            .success(function (data) {
+                $scope.entry = data;
+        });
+    };
+
 }]);

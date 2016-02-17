@@ -9,5 +9,7 @@ namespace TravelDiary.Models
         public string Content { get; set; }
         public string Destination { get; set; }
         public DateTime Date { get; set; }
+        public int? PreviousId { get; set; }
+        public int? NextId { get; set; }
     }
 }
