@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <div class="container">
+    <div class="container" ng-app="TravelDiaryApp">
         @RenderBody()
         <hr />
         <footer>
@@ -20,6 +20,7 @@
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/app/app.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
