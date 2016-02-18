@@ -176,6 +176,7 @@
     </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationDbContextInitializer.cs" />
+    <Compile Include="Models\Destination.cs" />
     <Compile Include="Models\DiaryEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
