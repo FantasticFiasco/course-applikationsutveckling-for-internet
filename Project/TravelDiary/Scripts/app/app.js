@@ -1,4 +1,4 @@
-﻿var app = angular.module("TravelDiaryApp", ['ngSanitize'])
+﻿var app = angular.module("TravelDiaryApp", ['ngSanitize', 'ngMap'])
 
     .factory("diaryEntryService", ["$http", function ($http) {
         var instance = {};
@@ -27,7 +27,6 @@
                     $scope.entry = data;
                 });
         };
-
     }])
 
     .directive("diaryEntryText", function () {
