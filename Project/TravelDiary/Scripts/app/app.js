@@ -1,6 +1,6 @@
 ﻿var app = angular.module("TravelDiaryApp", ['ngSanitize', 'ngMap'])
 
-    .factory("diaryEntryService", ["$http", function ($http) {
+    .factory("diaryEntryService", function ($http) {
         var instance = {};
 
         instance.getLatestEntry = function () {
@@ -12,9 +12,9 @@
         }
 
         return instance;
-    }])
+    })
 
-    .controller("DiaryEntryController", ["$scope", "diaryEntryService", function ($scope, diaryEntryService) {
+    .controller("DiaryEntryController", function ($scope, diaryEntryService) {
 
         diaryEntryService.getLatestEntry()
             .success(function (data) {
@@ -27,7 +27,7 @@
                     $scope.entry = data;
                 });
         };
-    }])
+    })
 
     .directive("diaryEntryText", function () {
         return {
