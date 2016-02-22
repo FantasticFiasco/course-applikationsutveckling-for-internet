@@ -1,20 +1,20 @@
-﻿var app = angular.module("TravelDiaryApp", ['ngSanitize', 'ngMap'])
+﻿var app = angular.module('TravelDiaryApp', ['ngSanitize', 'ngMap'])
 
-    .factory("diaryEntryService", function ($http) {
+    .factory('diaryEntryService', function ($http) {
         var instance = {};
 
         instance.getLatestEntry = function () {
-            return $http.get("api/diaryentry");
+            return $http.get('api/diaryentry');
         };
 
         instance.getEntry = function (id) {
-            return $http.get("api/diaryentry/" + id);
+            return $http.get('api/diaryentry/' + id);
         }
 
         return instance;
     })
 
-    .controller("DiaryEntryController", function ($scope, diaryEntryService, NgMap) {
+    .controller('DiaryEntryController', function ($scope, diaryEntryService, NgMap) {
 
         $scope.getEntry = function (id) {
             diaryEntryService.getEntry(id)
@@ -59,9 +59,9 @@
             });
     })
 
-    .directive("diaryEntryText", function () {
+    .directive('diaryEntryText', function () {
         return {
-            restrict: "E",
-            templateUrl: "Scripts/app/diary-entry-text.html"
+            restrict: 'E',
+            templateUrl: 'Scripts/app/diary-entry-text.html'
         };
     });
