@@ -1,5 +1,4 @@
 ﻿var app = angular.module('TravelDiaryApp', ['ngSanitize', 'ngMap'])
-
     .factory('diaryEntryService', function ($http) {
         var instance = {};
 
@@ -13,7 +12,15 @@
 
         return instance;
     })
+    .factory('photoService', function ($http) {
+        var instance = [];
 
+        instance.searchFor = function (text) {
+            return $http.get('api/photosearch/' + text);
+        }
+
+        return instance;
+    })
     .controller('DiaryEntryController', function ($scope, diaryEntryService, NgMap) {
 
         $scope.getEntry = function (id) {
@@ -58,7 +65,6 @@
                 $scope.updateMap();
             });
     })
-
     .directive('diaryEntryText', function () {
         return {
             restrict: 'E',
