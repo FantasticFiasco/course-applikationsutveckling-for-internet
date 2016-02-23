@@ -169,6 +169,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Network\BingImage.cs" />
     <Compile Include="Controllers\Api\DiaryEntryController.cs" />
     <Compile Include="Controllers\Api\PhotoSearchController.cs" />
@@ -216,6 +217,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angulargrid.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\diary-entry-text.html" />
     <Content Include="Scripts\bootstrap.js" />

@@ -1,4 +1,4 @@
-﻿var app = angular.module('TravelDiaryApp', ['ngSanitize', 'ngMap'])
+﻿var app = angular.module('travelDiaryApp', ['ngSanitize', 'ngMap', 'angularGrid'])
     .factory('diaryEntryService', function ($http) {
         var instance = {};
 
@@ -12,7 +12,7 @@
 
         return instance;
     })
-    .factory('photoService', function ($http) {
+    .factory('imageService', function ($http) {
         var instance = [];
 
         instance.searchFor = function (text) {
@@ -21,13 +21,14 @@
 
         return instance;
     })
-    .controller('DiaryEntryController', function ($scope, diaryEntryService, NgMap) {
+    .controller('DiaryEntryController', function ($scope, diaryEntryService, NgMap, imageService) {
 
         $scope.getEntry = function (id) {
             diaryEntryService.getEntry(id)
                 .success(function (data) {
                     $scope.entry = data;
                     $scope.updateMap();
+                    $scope.updateImages();
                 });
         };
 
@@ -53,6 +54,13 @@
             });
         }
 
+        $scope.updateImages = function() {
+            imageService.searchFor($scope.entry.destination.name)
+                .success(function (images) {
+                    $scope.images = images;
+            });
+        };
+
         diaryEntryService.getLatestEntry()
             .success(function (data) {
                 $scope.entry = data;
@@ -63,6 +71,7 @@
             .then(function (map) {
                 $scope.map = map;
                 $scope.updateMap();
+                $scope.updateImages();
             });
     })
     .directive('diaryEntryText', function () {

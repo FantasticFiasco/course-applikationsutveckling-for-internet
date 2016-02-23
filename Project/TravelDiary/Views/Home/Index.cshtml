@@ -5,9 +5,10 @@
 @section scripts {
     <script src="/bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <script src="http://maps.google.com/maps/api/js"></script>
+    <script src="~/Scripts/angulargrid.js"></script>
 }
 
-<div>
+<div ng-controller="DiaryEntryController">
 
     <div class="jumbotron">
         <h1>My Travel Diary</h1>
@@ -15,13 +16,24 @@
 
     <div class="row">
         <!-- Entry text -->
-        <div class="col-md-8" ng-controller="DiaryEntryController">
+        <div class="col-md-8">
             <diary-entry-text></diary-entry-text>
         </div>
 
         <!-- Map -->
         <div class="col-md-4">
             <ng-map></ng-map>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Images -->
+            <ul class="dynamic-grid" angular-grid="images" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false">
+                <li data-ng-repeat="image in images" class="grid">
+                    <img ng-src="{{image.url}}" class="grid-img" data-actual-width="{{image.width}}" data-actual-height="{{image.height}}" />
+                </li>
+            </ul>
         </div>
     </div>
 </div>

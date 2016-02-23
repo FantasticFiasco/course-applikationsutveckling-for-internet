@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json.Linq;
+using TravelDiary.Models;
 
 namespace TravelDiary.Network
 {
     public sealed class BingImage : IDisposable
     {
-        private static readonly string BaseUrl = "https://api.datamarket.azure.com/Bing/Search/v1/Image?Query=%27{0}%27&$format=json";
+        private static readonly string BaseUrl = "https://api.datamarket.azure.com/Bing/Search/v1/Image?Query=%27{0}%27&$format=json&$top=15";
         private static readonly string Username = "PwFAolhgrvXKlu5D0F13w+uBTbspjFTUtWYPsWPEyAM=";
         private static readonly string Password = "PwFAolhgrvXKlu5D0F13w+uBTbspjFTUtWYPsWPEyAM=";
 
@@ -22,7 +23,7 @@ namespace TravelDiary.Network
             client = CreateHttpClient();
         }
 
-        public async Task<IEnumerable<string>> SearchFor(string text)
+        public async Task<IEnumerable<Image>> SearchFor(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentNullException("text");
@@ -37,18 +38,25 @@ namespace TravelDiary.Network
             return client.GetStringAsync(requestUrl);
         }
 
-        private static IEnumerable<string> ParseData(string data)
+        private static IEnumerable<Image> ParseData(string data)
         {
             dynamic document = JObject.Parse(data);
 
-            List<string> photos = new List<string>();
+            List<Image> images = new List<Image>();
             
             foreach (dynamic entry in document.d.results)
             {
-                photos.Add(entry.Thumbnail.MediaUrl.Value);
+                var image = new Image
+                {
+                    Url = entry.MediaUrl.Value,
+                    Width = int.Parse(entry.Width.Value),
+                    Height = int.Parse(entry.Height.Value)
+                };
+
+                images.Add(image);
             }
 
-            return photos;
+            return images;
         }
 
         private static HttpClient CreateHttpClient()

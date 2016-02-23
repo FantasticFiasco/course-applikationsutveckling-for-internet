@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using TravelDiary.Models;
 using TravelDiary.Network;
 
 namespace TravelDiary.Controllers.Api
@@ -17,8 +18,8 @@ namespace TravelDiary.Controllers.Api
         [Route("api/photosearch/{text}")]
         public async Task<IHttpActionResult> Get(string text)
         {
-            IEnumerable<string> photos = await bingImage.SearchFor(text);
-            return Ok(photos);
+            IEnumerable<Image> images = await bingImage.SearchFor(text);
+            return Ok(images);
         }
 
         protected override void Dispose(bool disposing)
