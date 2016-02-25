@@ -32,32 +32,5 @@ namespace TravelDiary.Controllers.Api
 
             return Ok(diaryEntry);
         }
-
-        // POST api/diaryentry
-        public void Post([FromBody]string value)
-        {
-            throw new NotImplementedException();
-        }
-
-        // PUT api/diaryentry/5
-        public void Put(int id, [FromBody]string value)
-        {
-            throw new NotImplementedException();
-        }
-
-        // DELETE api/diaryentry/5
-        public async Task<IHttpActionResult> Delete(int id)
-        {
-            DiaryEntry diaryEntry = context.DiaryEntries.Find(id);
-            if (diaryEntry == null)
-            {
-                return NotFound();
-            }
-
-            context.DiaryEntries.Remove(diaryEntry);
-            await context.SaveChangesAsync();
-
-            return Ok();
-        }
     }
 }
